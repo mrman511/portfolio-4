@@ -1,0 +1,73 @@
+@import './variable.scss';
+
+.background{
+  background: linear-gradient(-65deg, transparent, $beige, transparent);
+  background-size: 100% 100%;
+  background-position: bottom;
+  // background-color: #782345;
+  z-index: -1;
+}
+
+.navigation{
+  // background: ($lightgrey);
+}
+
+.navBtn{
+  background: rgba($black, .3);
+}
+
+.mcBtn{
+  div {
+    background-color: $black;
+  }
+}
+
+.mouseCursorGradientTracking {
+  position: relative;
+  background: #7983ff;
+  padding: 0.5rem 1rem;
+  font-size: 1.2rem;
+  border: none;
+  color: white;
+  cursor: pointer;
+  outline: none;
+  overflow: hidden;
+}
+
+.mouseCursorGradientTracking span {
+  position: relative;
+}
+
+.mouseCursorGradientTracking::before {
+  --size: 0;
+  content: '';
+  position: absolute;
+  left: var(--x);
+  top: var(--y);
+  width: var(--size);
+  height: var(--size);
+  background: radial-gradient(circle closest-side, pink, transparent);
+  transform: translate(-50%, -50%);
+  transition: width 0.2s ease, height 0.2s ease;
+}
+
+.mouseCursorGradientTracking:hover::before {
+  --size: 200px;
+}
+
+@media only screen and (min-width: 768px) {
+
+  .nav {
+    
+  }
+  
+}
+
+@media (prefers-color-scheme: dark){
+  .background{
+    background: linear-gradient(-65deg, transparent, $black, transparent);
+  }
+  // .nav {
+  //   backg
+  // }
+}

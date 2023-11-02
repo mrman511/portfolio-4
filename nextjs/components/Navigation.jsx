@@ -2,10 +2,22 @@
 import { useState, useEffect, useRef } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import Link from "next/link";
+import { useRouter } from "next/router";
 
 export default function Navigation({styles}){
   const [showMenuObj, setShowMenuObj] = useState({show: false, click: 305});
   const navHeight = useRef();
+  
+  
+  // function routeClick(e, routeName){
+  //   e.preventDefault();
+  //   const router = useRouter();
+  //   router.push(
+  //     {
+  //       pathname: `/${routeName}`,
+  //     }
+  //   );
+  // }
 
   const navSpeed = .2;
   const btnOpenTransition = {
@@ -82,10 +94,10 @@ export default function Navigation({styles}){
           key='navLinksList-open'
           initial={{ translateY: '-100%', top: showMenuObj.click }}
         >
-          <li><Link className="relative ps-4 pe-12 py-6 " href=''>Projects</Link></li>
-          <li><Link className="relative ps-4 pe-12 py-6 " href=''>Contact</Link></li>
-          <li><Link className="relative ps-4 pe-12 py-6 " href=''>Resume</Link></li>
-          <li><Link className="relative ps-4 pe-12 py-6 " href=''>Contact</Link></li>
+          <li><Link className="relative ps-4 pe-12 py-6" href='/projects'>Projects</Link></li>
+          <li><Link className="relative ps-4 pe-12 py-6" href=''>Contact</Link></li>
+          <li><Link className="relative ps-4 pe-12 py-6" href=''>Resume</Link></li>
+          <li><Link className="relative ps-4 pe-12 py-6" href=''>Contact</Link></li>
         </motion.ul>
       </motion.nav>
       }

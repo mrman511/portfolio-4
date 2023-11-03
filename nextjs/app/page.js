@@ -24,7 +24,7 @@ export default function Home() {
     <>
     <BackGround styles={ globalStyles }/>
     <main>
-      <section className='w-full h-screen flex items-center'>
+      <section className={[globalStyles.page, 'w-full h-screen flex items-center'].join(' ')}>
         <Hero />
         <Navigation styles={ globalStyles }/>
       </section>

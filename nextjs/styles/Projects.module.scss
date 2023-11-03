@@ -1,1 +1,31 @@
-@import './variables';
+@import './variable.scss';
+
+.projectCard{
+  perspective: 1000;
+  
+}
+
+.background{
+  background: linear-gradient(-65deg, $offwhite, $beige, $offwhite);
+  z-index: -1;
+}
+
+.inner{
+  transition: transform 0.6s;
+  transform-style: preserve-3d;
+}
+
+.front, .back{
+  position: absolute;
+  backface-visibility: hidden;
+}
+
+.back{
+  transform: rotateY(180deg);
+}
+
+@media (prefers-color-scheme: dark){
+  .background{
+    background: linear-gradient(-65deg, black, $black, black);
+  }
+}

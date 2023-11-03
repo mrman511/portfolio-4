@@ -1,15 +1,8 @@
 @import './variable.scss';
 
 .background{
-  background: linear-gradient(-65deg, transparent, $beige, transparent);
-  background-size: 100% 100%;
-  background-position: bottom;
-  // background-color: #782345;
+  background: linear-gradient(-65deg, $offwhite, $beige, $offwhite);
   z-index: -1;
-}
-
-.navigation{
-  // background: ($lightgrey);
 }
 
 .navBtn{
@@ -65,9 +58,10 @@
 
 @media (prefers-color-scheme: dark){
   .background{
-    background: linear-gradient(-65deg, transparent, $black, transparent);
+    background-color: $black;
+    background: linear-gradient(-65deg, black, $black, black);
   }
-  // .nav {
-  //   backg
-  // }
+  .navBtn{
+    background: rgba($beige, .3);
+  }
 }

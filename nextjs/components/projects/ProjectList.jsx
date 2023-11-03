@@ -1,5 +1,6 @@
 'use client'
 import ProjectCard from "./ProjectCard";
+import { AnimatePresence } from "framer-motion";
 
 export default function ProjectList({styles, projects, globalStyles}){
   const parsedProjects = projects.map((project,i)=><ProjectCard 
@@ -7,11 +8,14 @@ export default function ProjectList({styles, projects, globalStyles}){
     styles={styles}
     project={project}
     globalStyles={globalStyles}
+    i={ i }
   />)
 
   return (
-    <section className={[styles.projectList, "w-full h-min flex flex-wrap justify-center items-end"].join(' ')}>
-      { parsedProjects }
-    </section>
+    <AnimatePresence>
+      <section className={[styles.projectList, "w-[75%] h-min ms-4 flex flex-wrap justify-center overflow-y-scroll"].join(' ')}>
+        { parsedProjects }
+      </section>
+    </AnimatePresence>
   );
 }

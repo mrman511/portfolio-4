@@ -1,13 +1,21 @@
 @import './variable.scss';
 
-.projectCard{
-  perspective: 1000;
-  
-}
 
 .background{
   background: linear-gradient(-65deg, $offwhite, $beige, $offwhite);
   z-index: -1;
+}
+
+.projectList{
+  perspective: 1000;
+}
+
+.cardOuter{
+  transform-style: preserve-3d;
+}
+
+.projectCard{
+  perspective: 1000;
 }
 
 .inner{

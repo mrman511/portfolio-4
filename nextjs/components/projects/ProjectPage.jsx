@@ -4,6 +4,7 @@ import { getProjects } from "@/utils/api/projects";
 
 import Navigation from "../Navigation";
 import ProjectList from "./ProjectList";
+import styles from '@/styles/Projects.module.scss';
 
 export default function ProjectPage({globalStyles}){
 
@@ -16,9 +17,9 @@ export default function ProjectPage({globalStyles}){
   })
 
   return(
-    <section className='w-full h-screen flex'>
+    <section className='fixed top-0 w-full h-screen flex'>
       <Navigation styles={ globalStyles }/>
-      {projects && <ProjectList projects={projects}/>}
+      {projects && <ProjectList projects={projects} styles={styles} globalStyles={ globalStyles }/>}
     </section>
   );
 }

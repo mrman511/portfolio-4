@@ -1,15 +1,16 @@
 'use client'
 import ProjectCard from "./ProjectCard";
 
-export default function ProjectList({styles, projects}){
-  const parsedProjects = projects.map(project=><ProjectCard 
-    key={`project-${project.id}`}
+export default function ProjectList({styles, projects, globalStyles}){
+  const parsedProjects = projects.map((project,i)=><ProjectCard 
+    key={`project-${i}`}
     styles={styles}
     project={project}
+    globalStyles={globalStyles}
   />)
 
   return (
-    <section className="w-full flex flex-wrap justify-center">
+    <section className={[styles.projectList, "w-full h-min flex flex-wrap justify-center items-end"].join(' ')}>
       { parsedProjects }
     </section>
   );

@@ -56,7 +56,7 @@ export default function Navigation({styles}){
   
 
   return(
-    <section className={[styles.navigation, "fixed w-[125px] h-screen right-0"].join(' ')}>
+    <section className={[styles.navigation, "fixed w-[125px] h-screen right-0 z-10"].join(' ')}>
       <AnimatePresence mode='wait' initial={false}>
       { showMenuObj.show && <motion.nav 
       key='navigation-open'

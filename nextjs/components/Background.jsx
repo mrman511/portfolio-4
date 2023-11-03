@@ -39,9 +39,9 @@ export default function BackGround({ styles }){
           particleRadiusFunction={ null }
           maxRadius={ 200 }
           maxRadiusFunction={ null }
-          includeStatic={ true }
-          staticParticleMaxRadius={ .5 }
-          staticParticleColor={ [...particleColour, .3] }
+          // includeStatic={ true }
+          // staticParticleMaxRadius={ .5 }
+          // staticParticleColor={ [...particleColour, .3] }
         />}
       </div>
   );

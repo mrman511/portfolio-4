@@ -17,9 +17,8 @@ export default function ProjectPage({globalStyles}){
   })
 
   return(
-    <section className='fixed top-0 w-full h-screen flex'>
-      <Navigation styles={ globalStyles }/>
+    <>
       {projects && <ProjectList projects={projects} styles={styles} globalStyles={ globalStyles }/>}
-    </section>
+    </>
   );
 }

@@ -6,30 +6,18 @@ import { useRouter } from "next/router";
 
 export default function Navigation({styles}){
   const [showMenuObj, setShowMenuObj] = useState({show: false, click: 305});
+  const [isAnimating, setIsAnimating] = useState(false)
   const navHeight = useRef();
   
   
-  // function routeClick(e, routeName){
-  //   e.preventDefault();
-  //   const router = useRouter();
-  //   router.push(
-  //     {
-  //       pathname: `/${routeName}`,
-  //     }
-  //   );
-  // }
-
   const navSpeed = .2;
-  const btnOpenTransition = {
+  const btnTransition = {
     duration: navSpeed,
-    width: { delay: navSpeed },
-    padding: { delay: navSpeed },
-    transform: { delay: navSpeed },
-  };
-  const btnClosedTransition = {
-    duration: navSpeed,
-    height: { delay: navSpeed },
-    top: { delay: navSpeed },
+    width: { delay: showMenuObj.show ? navSpeed : 0 },
+    height: { delay: showMenuObj.show ? 0 : navSpeed },
+    top: { delay: showMenuObj.show ? 0 : navSpeed },
+    padding: { delay: showMenuObj.show ? navSpeed: 0 },
+    transform: { delay: showMenuObj.show ? navSpeed: 0 },
   };
   
   useEffect(() => {
@@ -41,58 +29,78 @@ export default function Navigation({styles}){
   }, [setShowMenuObj]);
 
   const handleClick = (e) => {
-    if (!showMenuObj.show){
-      const obj = { show: true }
-      if ((e.pageY < (navHeight.current + 20)) ){
-        obj.click = navHeight.current + 20;
-      } else {
-        obj.click = e.pageY;
-      } 
-      setShowMenuObj(obj)
-    }else{
-      setShowMenuObj(prev => ({...prev, show: false}));
+    console.log('here');
+    if (!isAnimating){
+      if (!showMenuObj.show){
+        const obj = { show: true }
+        if ((e.pageY < (navHeight.current + 20)) ){
+          obj.click = navHeight.current + 20;
+          console.log(e);
+        } else {
+          obj.click = e.pageY;
+        } 
+        setShowMenuObj(obj)
+      }else{
+        setShowMenuObj(prev => ({...prev, show: false}));
+      }
+      setIsAnimating(true)
     }
   };
   
 
   return(
-    <section className={[styles.navigation, "fixed w-[125px] h-screen right-0 z-10"].join(' ')}>
-      <AnimatePresence mode='wait' initial={false}>
-      { showMenuObj.show && <motion.nav 
+    <section className={[styles.navigation, "fixed justify-self-stretch h-screen right-0 z-10"].join(' ')}>
+      <motion.nav className='absolute w-[125px] h-screen right-0 z-10'
       key='navigation-open'
-      initial={{left: 0, translateX: '100%'}}
-      animate={{translateX: 0, transition: { duration: navSpeed }}}
+      initial={false}
+      animate={{
+        translateX: showMenuObj.show ? '0%' : '100%' ,
+        transition: { duration: navSpeed }
+      }}
       >
         <motion.article onClick={(e)=>{ handleClick(e) }} className={[styles.navBtn, "absolute flex justify-center items-center"].join(' ')}
           key='navBtn-open'
-          initial={{ 
-            transform: 'translateX(-100%)',
-            height: '100vh',
-            width: '2.5rem',
-            top: 0,
-            padding: 0, 
-          }}
+          initial={false}
           animate={{
-            transform: 'translateX(0)', 
-            height: '35px', 
-            width: '100%',
-            top: showMenuObj.click,
-            padding: '0 2em 0 0',
-            transition: btnOpenTransition
+            transform: showMenuObj.show ? 'translateX(0)': 'translateX(-100%)', 
+            height: showMenuObj.show ? 'auto' : '100vh', 
+            width: showMenuObj.show ? '100%' : 'auto',
+            top: showMenuObj.show ? `${showMenuObj.click}px`: '0px',
+            paddingRight: showMenuObj.show ? '25px': '0px',
           }}
+          transition={btnTransition}
+          onAnimationComplete={()=>setIsAnimating(false)}
         >
-          <motion.div className={[styles.mcBtn, "w-[30px] h-[25px] flex flex-col justify-between items-center"].join(' ')}
-            key='mcBtn'
-          >
-            <div className="w-full h-[3px]"></div>
-            <div className="w-full h-[3px]"></div>
-            <div className="w-full h-[3px]"></div>
+          <motion.div className={[styles.mcBtn, "relative w-[35px] h-[30px] m-2"].join(' ')}>
+            <motion.div className="absolute w-full h-[4px] rounded-md -translate-y-1/2"
+              initial={{ translateY: '-50%'  }}
+              animate={{
+                top: showMenuObj.show ? '15px' : '0px',
+                rotate: showMenuObj.show ? '45deg' : '0deg'
+              }}
+            ></motion.div>
+            <motion.div className="absolute w-5/6 h-[3px] self-end rounded-md -translate-y-1/2"
+              initial={{ translateY: '-50%' }}
+              animate={{
+                alignSelf: showMenuObj.show ? 'end' : 'center',
+                top: '15px',
+                width: showMenuObj.show ? '0%' : '83%' 
+              }}
+            ></motion.div>
+            <motion.div className="absolute w-full h-[4px] rounded-md -translate-y-1/2"
+              initial={{ translateY: '-50%' }}
+              animate={{
+                top: showMenuObj.show ? '15px' : '30px',
+                rotateZ: showMenuObj.show ? '-45deg' : '0deg'
+              }}
+            ></motion.div>
           </motion.div>
         </motion.article>
 
-        <motion.ul id='navLinks' className={[styles.navLinks, "relative h-[250px] flex flex-col justify-evenly text-lg"].join(' ')}
+        <motion.ul id='navLinks' className={[styles.navLinks, "absolute h-[250px] flex flex-col justify-evenly text-lg"].join(' ')}
           key='navLinksList-open'
-          initial={{ translateY: '-100%', top: showMenuObj.click }}
+          initial={false}
+          animate={{ translateY: '-100%', top: `${showMenuObj.click}px` }}
         >
           <li><Link className="relative ps-4 pe-12 py-6" href='/projects'>Projects</Link></li>
           <li><Link className="relative ps-4 pe-12 py-6" href=''>Contact</Link></li>
@@ -100,50 +108,6 @@ export default function Navigation({styles}){
           <li><Link className="relative ps-4 pe-12 py-6" href=''>Contact</Link></li>
         </motion.ul>
       </motion.nav>
-      }
-
-      { !showMenuObj.show && <motion.nav 
-        key='nav-closed'
-        initial={{translateX: 0}}
-        animate={{ translateX: '100%'}}
-      >
-         <motion.article onClick={(e)=>{ handleClick(e) }} className={[styles.navBtn, "absolute flex justify-center items-center"].join(' ')}
-          key='navBtn-closed'
-          initial={{
-            transform: 'translateX(0)', 
-            height: '35px', 
-            width: '100%',
-            top: showMenuObj.click,
-            padding: '0 2em 0 0',
-          }}
-          animate={{
-            transform: 'translateX(-100%)',
-            height: '100vh',
-            width: '2.5rem',
-            top: 0,
-            padding: 0, 
-            transition: btnClosedTransition,
-          }}
-        >
-          <div className={[styles.mcBtn, "w-[30px] h-[25px] flex flex-col justify-between items-center"].join(' ')}>
-            <div className="w-full h-[3px]"></div>
-            <div className="w-full h-[3px]"></div>
-            <div className="w-full h-[3px]"></div>
-          </div>
-        </motion.article>
-
-        <motion.ul id='navLinks' className={[styles.navLinks, "relative h-[250px] flex flex-col justify-evenly text-lg"].join(' ')}
-          key='navLinksList-close'
-          initial={{ translateY: '-100%', top: showMenuObj.click }}
-        >
-        <li ><Link className="relative ps-4 pe-12 py-6 " href=''>Projects</Link></li>
-          <li ><Link className="relative ps-4 pe-12 py-6 " href=''>Contact</Link></li>
-          <li ><Link className="relative ps-4 pe-12 py-6 " href=''>Resume</Link></li>
-          <li ><Link className="relative ps-4 pe-12 py-6 " href=''>Contact</Link></li>
-        </motion.ul> 
-      </motion.nav>}
-
-      </AnimatePresence> 
     </section>
   );
 }

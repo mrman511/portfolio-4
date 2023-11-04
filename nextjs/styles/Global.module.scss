@@ -1,8 +1,19 @@
 @import './variable.scss';
 
+.page{
+  display: grid;
+  grid-template: 100vh / calc(100% - 125px) 125px;
+  grid-template-areas: 'main nav';
+}
+
 .background{
   background: linear-gradient(-65deg, $offwhite, $beige, $offwhite);
   z-index: -1;
+}
+
+.navigation{
+  grid-area: nav;
+  justify-self: end;
 }
 
 .navBtn{

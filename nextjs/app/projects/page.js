@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import BackGround from '@/components/Background';
 import globalStyles from '@/styles/Global.module.scss';
+import Navigation from '@/components/Navigation';
 import ProjectPage from '@/components/projects/ProjectPage';
 
 export const metadata = {
@@ -13,8 +14,9 @@ export default function Projects(){
   return (
     <>
     <BackGround styles={ globalStyles }/>
-    <main>
+    <main className={[globalStyles.page, 'relative w-screen h-screen flex'].join(' ')}>
       <ProjectPage globalStyles={globalStyles}/>
+      <Navigation styles={ globalStyles }/>
     </main>
     </>
   )

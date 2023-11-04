@@ -10,24 +10,12 @@ export const metadata = {
 
 export default function Home() {
 
-  // function shallowRouter(e, route){
-  //   e.preventDefault();
-  //   const router = useRouter();
-  //   router.push(
-  //     { pathname: `/${route}` },
-  //     undefined,
-  //     { shallow: true }
-  //   );
-  // }
-
   return (
     <>
     <BackGround styles={ globalStyles }/>
-    <main>
-      <section className={[globalStyles.page, 'w-full h-screen flex items-center'].join(' ')}>
-        <Hero />
-        <Navigation styles={ globalStyles }/>
-      </section>
+    <main className={[globalStyles.page, 'w-full h-screen flex items-center'].join(' ')}>
+      <Hero />
+      <Navigation styles={ globalStyles }/>
     </main>
     </>
   )

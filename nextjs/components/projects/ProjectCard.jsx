@@ -11,8 +11,6 @@ export default function ProjectCard({styles, project, i}){
   const cardRef = useRef(null);
 
   const handleFlip = () => {
-    console.log(cardRef.current.offsetLeft);
-    console.log(cardRef.current.offsetRight);
     if (!isAnimating){
       toggleIsFlipped();
       setIsAnimating(true);
@@ -23,7 +21,7 @@ export default function ProjectCard({styles, project, i}){
   })
 
   return (
-    <motion.section ref={cardRef} className={[styles.cardOuter, "relative w-[33%] h-72 overflow-hidden"].join(' ')}
+    <motion.section ref={cardRef} className={[styles.cardOuter, "relative w-[33vw] h-72 m-2 overflow-hidden"].join(' ')}
       initial={{ rotateX: 270, originY: '100%' }}
       animate={{ rotateX: 360 }}
       transition={{ duration: 0.3, animationDirection: 'normal', delay: (Math.sin(i*29)/3) }}
@@ -31,13 +29,10 @@ export default function ProjectCard({styles, project, i}){
     >
 
       <article onClick={(e)=>{handleFlip(e)}} className={[styles.projectCard, styles.front, "w-full h-full"].join(' ')}>
-        <div className="absolute w-full bottom-0 flex flex-col items-center">
-          <h2>{ project.title }</h2>
-        </div>
-
+        
         <motion.div className={[styles.inner, "relative w-full h-full bottom-0"].join(' ')}
           initial={false}
-          animate={{ rotateY: isFlipped? 180 : 360 }}
+          animate={{ rotateY: isFlipped? 180 : 0 }}
           transition={{ duration: 0.3, animationDirection: 'normal' }}
           onAnimationComplete={()=> setIsAnimating(false) }
         >
@@ -55,12 +50,12 @@ export default function ProjectCard({styles, project, i}){
               />
           </div>
 
-          <div className={[styles.back, "relative top-0 w-full h-full overflow-hidden"].join(' ')}>
+          <div className={[styles.back, "relative top-0 w-full h-full flex flex-col items-center justify-around overflow-hidden"].join(' ')}>
             <div className={[styles.background, "absolute w-[100vw] h-[100vh]"].join(' ')}
               initial={false}
               style={{
-                top: isFlipped ? `-${cardRef.current.offsetTop}px` : 0,
-                left: isFlipped ? `-${cardRef.current.offsetLeft}px` : 0,
+                top: cardRef.current ? `-${cardRef.current.offsetTop}px` : 0,
+                left: cardRef.current ? `-${cardRef.current.offsetLeft}px` : 0,
               }}
             >
             </div>
@@ -81,22 +76,19 @@ export default function ProjectCard({styles, project, i}){
                   </ul>
                 </li>
               </ul>
+              <div className="w-full flex flex-col items-center">
+                <h2>{ project.title }</h2>
+              </div>
             </div>
           </div>
 
         </motion.div>
       </article>
 
-      <article className={[styles.back, "w-full h-full"]}>
-        <div className={[styles.background, "absolute w-[100vw] h-[100vh]"].join(' ')}
-          initial={false}
-          style={{
-            top: isFlipped ? `-${cardRef.current.offsetTop}px` : 0,
-            left: isFlipped ? `-${cardRef.current.offsetLeft}px` : 0,
-          }}
-        >
+      {!finishedInitialAnimation && <article className={[styles.back, "w-full h-full"]}>
+        <div className={[styles.background, "absolute w-[100vw] h-[100vh]"].join(' ')}>
         </div>
-      </article>
+      </article>}
     </motion.section>
   )
 }

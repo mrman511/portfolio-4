@@ -13,7 +13,7 @@ export default function ProjectList({styles, projects, globalStyles}){
 
   return (
     <AnimatePresence>
-      <section className={[styles.projectList, "w-[75%] h-min ms-4 flex flex-wrap justify-center overflow-y-scroll"].join(' ')}>
+      <section className={[styles.projectList, "full h-min ms-4 flex flex-wrap justify-center overflow-y-scroll"].join(' ')}>
         { parsedProjects }
       </section>
     </AnimatePresence>

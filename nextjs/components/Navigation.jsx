@@ -1,13 +1,23 @@
 'use client'
 import { useState, useEffect, useRef } from "react";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import Link from "next/link";
-import { useRouter } from "next/router";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import navLinks from "@/utils/data/navLinks";
+
 
 export default function Navigation({styles}){
   const [showMenuObj, setShowMenuObj] = useState({show: false, click: 305});
   const [isAnimating, setIsAnimating] = useState(false)
   const navHeight = useRef();
+
+  const parsedNavLinks = navLinks.map(link=>(
+    <div key={`nav-icon-${link.title}`} className={[styles.icon, "relative w-6 h-6 me-4"].join(' ')}>
+      <Link href={link.path}>
+        <FontAwesomeIcon className={ [styles.icon, 'w-full h-full'].join(' ') } icon={link.icon}/>
+      </Link>
+    </div>
+  ))
   
   
   const navSpeed = .2;
@@ -106,6 +116,12 @@ export default function Navigation({styles}){
           <li><Link className="relative ps-4 pe-12 py-6" href=''>Contact</Link></li>
           <li><Link className="relative ps-4 pe-12 py-6" href=''>Resume</Link></li>
           <li><Link className="relative ps-4 pe-12 py-6" href=''>Contact</Link></li>
+          <li>
+            <div className="w-full ps-4 flex items-center">
+              { parsedNavLinks }
+            </div>
+          </li>
+
         </motion.ul>
       </motion.nav>
     </section>

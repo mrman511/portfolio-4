@@ -10,7 +10,10 @@ def end_points(request):
   endpoints = {
     'end_points': {
       'GET': 'api/'
-    }
+    },
+    'projects': {
+      'GET': 'api/projects/'
+    },
   }
   return Response(endpoints)
 

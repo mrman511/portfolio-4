@@ -3,3 +3,19 @@ $offwhite: #fffef8;
 $lightgrey: #eaeaea;
 $beige: #ddc5ba;
 $black: 	#1c1414;
+
+.icon{
+  svg{
+    path{
+      fill: $lightgrey;
+    }
+  }
+}
+
+@media (prefers-color-scheme: dark){
+  .icon{
+    svg{
+      fill: $lightgrey;
+    }
+  }
+}

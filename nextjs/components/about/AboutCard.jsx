@@ -1,7 +1,7 @@
 import { motion, useAnimation, useInView } from "framer-motion";
 
 
-export default function AboutCard({styles, paragraph, showCard, i, toggleAnimating}){
+export default function AboutCard({styles, data, Component, showCard, i, toggleAnimating}){
 
   const initial = {   
     translateY: '-100%',
@@ -39,20 +39,13 @@ export default function AboutCard({styles, paragraph, showCard, i, toggleAnimati
     top: animateTop(), 
   }
 
-
   return(
-    <motion.article className="absolute w-auto flex flex-col justify-center"
+    <motion.article className="absolute w-full flex flex-col justify-center"
     initial={ initial }
     animate={ animate }
     onAnimationComplete={ ()=>{ setTimeout(()=>{ toggleAnimating() }, 500) } }
     >
-      <motion.div
-        className="relative"
-      >
-        <p className="my-4 text-center  sm:text-lg md:text-xl">
-          { paragraph }
-        </p>
-      </motion.div>
+      <Component data={ data } />
     </motion.article>
   )
 }

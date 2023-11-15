@@ -27,10 +27,30 @@
 .front, .back{
   position: absolute;
   backface-visibility: hidden;
+  transform-style: preserve-3d;
 }
 
 .back{
   transform: rotateY(180deg);
+  transform-style: preserve-3d;
+  border: 2px solid $lightgrey;
+  // transform: translateZ(-80px);
+
+  .icons {
+    background-color: rgba($black, .25);
+    transform-style: preserve-3d;
+    transform: translateZ(80px);
+  }
+  
+  .inside {
+    // transform-style: preserve-3d;
+    // transform: translateZ(80px);
+  }
+
+  .btn{
+    transform-style: preserve-3d;
+    transform: translateZ(80px);
+  }
 }
 
 @media (prefers-color-scheme: dark){

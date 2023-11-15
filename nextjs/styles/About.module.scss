@@ -1,0 +1,8 @@
+@import './variable.scss';
+
+.aboutList{
+
+  & ::-webkit-scrollbar{
+    display: none !important;
+  }
+}

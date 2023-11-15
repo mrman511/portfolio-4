@@ -4,6 +4,10 @@
   display: grid;
   grid-template: 100vh / calc(100% - 125px) 125px;
   grid-template-areas: 'main nav';
+
+  &::-webkit-scrollbar{
+    display: none !important;
+  }
 }
 
 .background{

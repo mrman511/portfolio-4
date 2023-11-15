@@ -7,9 +7,14 @@ $black: 	#1c1414;
 .icon{
   svg{
     path{
-      fill: $lightgrey;
+      fill: $black;
     }
   }
+}
+
+.btn{
+  border: 2px solid $lightgrey;
+  box-shadow: 3px 3px 3px $black;
 }
 
 @media (prefers-color-scheme: dark){

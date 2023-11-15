@@ -1,9 +1,12 @@
 'use client'
 import Image from "next/image";
+import Link from "next/link";
 import defaultImage from '@/public/images/default.jpeg';
 import { useState, useRef, useEffect } from "react";
 import { motion, useCycle } from "framer-motion";
 import { getProjectImages } from "@/utils/api/projects";
+import CardFront from "./CardFront";
+import CardBack from "./CardBack";
 
 export default function ProjectCard({styles, project, i}){
   const [isFlipped, toggleIsFlipped] = useCycle(false, true);
@@ -23,7 +26,6 @@ export default function ProjectCard({styles, project, i}){
     if (!cardImages){
       getProjectImages(setCardImages, project);
     }
-    console.log(cardImages);
   })
 
   return (
@@ -56,49 +58,8 @@ export default function ProjectCard({styles, project, i}){
             }}
             onAnimationComplete={()=> setIsAnimating(false) }
           >
-            <div className={[styles.front, "w-full h-full"]}>
-              <Image 
-                src={ 'data:image/png;base64,' + cardImages.mobile }
-                fill
-                alt={ project.title }
-                style={{
-                  objectFit: 'cover',
-                  objectPosition: 'top',
-                }}
-                sizes='100px'
-                />
-            </div>
-            <div className={[styles.back, "relative top-0 w-full h-full flex flex-col items-center justify-around overflow-hidden"].join(' ')}>
-              <div className={[styles.background, "absolute w-[100vw] h-[100vh]"].join(' ')}
-                initial={false}
-                style={{
-                  top: cardRef.current ? `-${cardRef.current.offsetTop}px` : 0,
-                  left: cardRef.current ? `-${cardRef.current.offsetLeft}px` : 0,
-                }}
-              >
-              </div>
-              <p>{project.description}</p>
-              <div>
-                <h4>Stack</h4>
-                <ul>
-                  <li> Python
-                    <ul>
-                      <li>Django</li>
-                      <li>Django-Rest-Framework</li>
-                    </ul>
-                  </li>
-                  <li>JavaScript
-                    <ul>
-                      <li>Next.js</li>
-                      <li>Framer Motion</li>
-                    </ul>
-                  </li>
-                </ul>
-                <div className="w-full flex flex-col items-center">
-                  <h2>{ project.title }</h2>
-                </div>
-              </div>
-            </div>
+            <CardFront styles={styles} Image={Image} img={cardImages.mobile} project={project}/>
+            <CardBack styles={styles} cardRef={cardRef} Image={Image} Link={Link} img={cardImages.desktop} project={project}/>
           </motion.div>
         </article>
       {!finishedInitialAnimation && <article className={[styles.back, "w-full h-full"]}>

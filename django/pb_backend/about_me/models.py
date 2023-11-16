@@ -1,6 +1,7 @@
 from django.db import models
 from frameworks.models import Framework
 from languages.models import Language
+from technologies.models import Technology
 
 # Create your models here.
 class Paragraph(models.Model):
@@ -14,3 +15,7 @@ class Stack(models.Model):
 
   languages=models.ManyToManyField(Language)
   frameworks=models.ManyToManyField(Framework)
+  technologies=models.ManyToManyField(Technology)
+
+  def __str__(self):
+    return self.title

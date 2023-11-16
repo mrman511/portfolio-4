@@ -1,12 +1,8 @@
 from rest_framework import serializers
-from projects.models import Project, Technology, Tag
+from projects.models import Project, Tag
 from languages.serializers import LanguageSerializer
 from frameworks.serializers import FrameworkSerializer
-
-class TechnologySerializer(serializers.ModelSerializer):
-  class Meta:
-    model=Technology
-    fields='__all__'
+from technologies.serializers import TechnologySerializer
 
 class TagSerializer(serializers.ModelSerializer):
   class Meta:

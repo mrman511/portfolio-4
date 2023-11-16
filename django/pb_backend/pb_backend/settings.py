@@ -42,6 +42,9 @@ INSTALLED_APPS = [
     'corsheaders',
 
     'projects.apps.ProjectsConfig',
+    'about_me.apps.AboutMeConfig',
+    'languages.apps.LanguagesConfig',
+    'frameworks.apps.FrameworksConfig',
 ]
 
 MIDDLEWARE = [

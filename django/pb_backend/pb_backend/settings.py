@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'about_me.apps.AboutMeConfig',
     'languages.apps.LanguagesConfig',
     'frameworks.apps.FrameworksConfig',
+    'technologies.apps.TechnologiesConfig',
 ]
 
 MIDDLEWARE = [

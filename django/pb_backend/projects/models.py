@@ -2,12 +2,7 @@ from venv import create
 from django.db import models
 from languages.models import Language
 from frameworks.models import Framework
-
-class Technology(models.Model):
-  name=models.CharField(max_length=100, blank=True, null=True, unique=True)
-
-  def __str__(self):
-    return self.name
+from technologies.models import Technology
 
 class Tag(models.Model):
   name=models.CharField(max_length=100, blank=True, null=True, unique=True)

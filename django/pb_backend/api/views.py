@@ -30,12 +30,6 @@ def projects(request):
       str=project['mobile_image']
       project['image']= getBase64Image(str[1:])
 
-    # if (project['desktop_image']):
-    #   str=project['desktop_image']
-    #   with open(f'static/images{ str }', 'rb') as image_file:
-    #     mobile_image=base64.b64encode(image_file.read()).decode('utf-8')
-    #   project['desktop_image']= mobile_image
-
   return Response(serializer.data)
 
 @api_view(['GET'])

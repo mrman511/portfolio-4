@@ -3,6 +3,7 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from projects.serializers import ProjectSerializer
 from about_me.serializers import ParagraphSerializer, StackSerializer
+from .helpers import getBase64Image
 
 from projects.models import Project
 from about_me.models import Paragraph, Stack
@@ -27,9 +28,8 @@ def projects(request):
   for project in serializer.data:
     if (project['mobile_image']):
       str=project['mobile_image']
-      with open(f'static/images{ str }', 'rb') as image_file:
-        mobile_image=base64.b64encode(image_file.read()).decode('utf-8')
-      project['image']= mobile_image
+      project['image']= getBase64Image(str[1:])
+
     # if (project['desktop_image']):
     #   str=project['desktop_image']
     #   with open(f'static/images{ str }', 'rb') as image_file:
@@ -42,6 +42,10 @@ def projects(request):
 def about(request):
   stacks = Stack.objects.all()
   stack_serializer = StackSerializer(stacks, many=True)
+  for stack in stack_serializer.data:
+    str=stack['image']
+    stack['image']= getBase64Image(str[1:])
+
   paragraphs = Paragraph.objects.all().order_by('order')
   paragrph_serializer = ParagraphSerializer(paragraphs, many=True)
 

@@ -11,7 +11,6 @@ export default function MyStack({}){
           <h2 height>JavaScript</h2>
         </div>
       </article>
-
     </section>
   );
 }

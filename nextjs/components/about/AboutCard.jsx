@@ -1,7 +1,8 @@
-import { motion, useAnimation, useInView } from "framer-motion";
+import { motion } from "framer-motion";
 
 
-export default function AboutCard({styles, data, Component, showCard, i, toggleAnimating}){
+export default function AboutCard({styles, data, Component, showCard, toggleAnimating, order}){
+  const i = order ? order : data.order
 
   const initial = {   
     translateY: '-100%',
@@ -22,12 +23,10 @@ export default function AboutCard({styles, data, Component, showCard, i, toggleA
     if (i === showCard ){
       return '50%'
     } else if ((i + 1) === showCard) {
-      console.log(`oneAboveCard-${i}`)
       return '15%'
     } else if (i < showCard){
       return '0%'
     } else if ((i - 1) === showCard) {
-      console.log(`oneBelowCard-${i}`)
       return '85%'
     } else if (i < showCard){
       return '100%'

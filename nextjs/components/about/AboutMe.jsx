@@ -5,7 +5,7 @@ import AboutList from "./AboutList";
 
 
 
-export default function AboutMe({styles}){
+export default function AboutMe({ styles }){
   const [aboutMe, setAboutMe]=useState(null);
   
 

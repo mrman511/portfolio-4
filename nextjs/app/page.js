@@ -1,5 +1,6 @@
 import BackGround from '@/components/Background';
 import Navigation from '@/components/Navigation';
+import MobileNavigation from '@/components/MobileNavigation';
 import Hero from '@/components/Hero';
 import globalStyles from '@/styles/Global.module.scss';
 
@@ -16,6 +17,7 @@ export default function Home() {
     <main className={[globalStyles.page, 'w-full h-screen flex items-center'].join(' ')}>
       <Hero />
       <Navigation styles={ globalStyles }/>
+      <MobileNavigation styles={ globalStyles }/>
     </main>
     </>
   )

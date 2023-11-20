@@ -6,13 +6,13 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import navLinks from "@/utils/data/navLinks";
 
 
-export default function Navigation({styles}){
+export default function MobileNavigation({styles}){
   const [showMenuObj, setShowMenuObj] = useState({show: false, click: 305});
   const [isAnimating, setIsAnimating] = useState(false)
   const navHeight = useRef();
 
   const parsedNavLinks = navLinks.map(link=>(
-    <div key={`nav-icon-${link.title}`} className={[styles.icon, "relative w-6 h-6 me-4"].join(' ')}>
+    <div key={`nav-icon-${link.title}`} className="relative w-6 h-6 me-4">
       <Link href={link.path}>
         <FontAwesomeIcon className={ [styles.icon, 'w-full h-full'].join(' ') } icon={link.icon}/>
       </Link>
@@ -21,14 +21,6 @@ export default function Navigation({styles}){
   
   
   const navSpeed = .2;
-  const btnTransition = {
-    duration: navSpeed,
-    width: { delay: showMenuObj.show ? navSpeed : 0 },
-    height: { delay: showMenuObj.show ? 0 : navSpeed },
-    top: { delay: showMenuObj.show ? 0 : navSpeed },
-    padding: { delay: showMenuObj.show ? navSpeed: 0 },
-    transform: { delay: showMenuObj.show ? navSpeed: 0 },
-  };
   
   useEffect(() => {
     const nav = document.getElementById('navLinks');
@@ -39,7 +31,6 @@ export default function Navigation({styles}){
   }, [setShowMenuObj]);
 
   const handleClick = (e) => {
-    console.log('here');
     if (!isAnimating){
       if (!showMenuObj.show){
         const obj = { show: true }
@@ -59,58 +50,64 @@ export default function Navigation({styles}){
   
 
   return(
-    <section className={[styles.navigation, "fixed h-screen hidden sm:block justify-self-stretch right-0 z-10"].join(' ')}>
-      <motion.nav className='absolute w-[125px] h-screen right-0 z-10'
+    <section className={[styles.navigation, "fixed w-screen block sm:hidden justify-self-stretch top-0 z-10"].join(' ')}>
+      <motion.nav className='absolute h-[125px] w-full z-10'
       key='navigation-open'
-      // initial={false}
       animate={{
-        translateX: showMenuObj.show ? '0%' : '100%' ,
+        // translateY: showMenuObj.show ? '0%' : '100%' ,
         transition: { duration: navSpeed }
       }}
       >
-        <motion.article onClick={(e)=>{ handleClick(e) }} className={[styles.navBtn, "absolute flex justify-center items-center"].join(' ')}
-          key='navBtn-open'
-          // initial={false}
-          animate={{
-            transform: showMenuObj.show ? 'translateX(0)': 'translateX(-100%)', 
-            height: showMenuObj.show ? 'auto' : '100vh', 
-            width: showMenuObj.show ? '100%' : 'auto',
-            top: showMenuObj.show ? `${showMenuObj.click}px`: '0px',
-            paddingRight: showMenuObj.show ? '25px': '0px',
-          }}
-          transition={btnTransition}
-          onAnimationComplete={()=>setIsAnimating(false)}
-        >
-          <motion.div className={[styles.mcBtn, "relative w-[35px] h-[30px] m-2"].join(' ')}>
+        <article onClick={(e)=>{ handleClick(e) }} className={[styles.navBtn, "absolute w-16 h-16 right-0 m-4 rounded-lg flex justify-center items-center"].join(' ')}
+          key='navBtn-open'>
+          <motion.div className={[styles.mcBtn, "relative w-[35px] h-[30px] m-2 z-10"].join(' ')}>
             <motion.div className="absolute w-full h-[4px] rounded-md -translate-y-1/2"
               initial={{ translateY: '-50%'  }}
               animate={{
                 top: showMenuObj.show ? '15px' : '0px',
-                rotate: showMenuObj.show ? '45deg' : '0deg'
+                rotate: showMenuObj.show ? '45deg' : '0deg',
+                transition: { 
+                  rotate: {delay: showMenuObj.show ? .3 : 0 },
+                  top: { delay: showMenuObj.show ? 0 : .3 }
+                }
               }}
+              onAnimationComplete={()=>setIsAnimating(false)}
             ></motion.div>
             <motion.div className="absolute w-5/6 h-[3px] self-end rounded-md -translate-y-1/2"
-              initial={{ translateY: '-50%' }}
+              initial={{ translateY: '-50%',  }}
               animate={{
                 alignSelf: showMenuObj.show ? 'end' : 'center',
                 top: '15px',
-                width: showMenuObj.show ? '0%' : '83%' 
+                width: showMenuObj.show ? '0%' : '83%',
+                transition: {
+                  width: {
+                    delay: .3,
+                    duration: 0,
+                  }
+                }
               }}
             ></motion.div>
             <motion.div className="absolute w-full h-[4px] rounded-md -translate-y-1/2"
               initial={{ translateY: '-50%' }}
               animate={{
                 top: showMenuObj.show ? '15px' : '30px',
-                rotateZ: showMenuObj.show ? '-45deg' : '0deg'
+                rotate: showMenuObj.show ? '-45deg' : '0deg',
+                transition: { 
+                  rotate: { delay: showMenuObj.show ? .3 : 0 },
+                  top: { delay: showMenuObj.show ? 0 : .3 }
+                }
               }}
             ></motion.div>
           </motion.div>
-        </motion.article>
+        </article>
 
-        <motion.ul id='navLinks' className={[styles.navLinks, "absolute h-[250px] flex flex-col justify-evenly text-lg"].join(' ')}
+        <motion.ul id='navLinks' className={[styles.navLinks, "absolute h-[350px] pt-24 flex flex-col justify-evenly text-lg rounded-es-lg"].join(' ')}
           key='navLinksList-open'
-          // initial={false}
-          animate={{ translateY: '-100%', top: `${showMenuObj.click}px` }}
+          initial={{ translateX: '-100%', left: '100%' }}
+          animate={{
+            left: '100%',
+            translateX: showMenuObj.show ? '0%' : '-100%', 
+          }}
         >
           <li><Link className="relative ps-4 pe-12 py-6" href='/projects'>Projects</Link></li>
           <li><Link className="relative ps-4 pe-12 py-6" href='/about'>About</Link></li>

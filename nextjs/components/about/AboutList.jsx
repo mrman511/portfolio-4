@@ -1,4 +1,4 @@
-import { useRef, useState} from "react";
+import { useRef, useState, useEffect} from "react";
 import { useCycle } from "framer-motion";
 import AboutCard from "./AboutCard";
 import AboutParagraph from "./AboutParagraph";
@@ -6,9 +6,9 @@ import MyStack from "./MyStack";
 
 
 export default function AboutList({ styles, aboutMe }){
-  const [animating, toggleAnimating] = useCycle(false)
-  const [showCard, setShowCard]=useState(1)
-  const scrollCount = useRef(0)
+  const [animating, toggleAnimating] = useCycle(false);
+  const [showCard, setShowCard]=useState(1);
+  const scrollCount = useRef(0);
   const scrollLimiter = 1000;
 
   const parsedParagraphs = aboutMe.paragraphs.map((paragraph, i)=>(
@@ -18,42 +18,59 @@ export default function AboutList({ styles, aboutMe }){
       showCard={ showCard }
       toggleAnimating={ toggleAnimating }
     />
-  ))
+  ));
 
   const parsedStack = (
     <AboutCard key={`bio-stack`}
+      styles={ styles }
       data={ aboutMe.stacks }
-      order={parsedParagraphs.length + 2}
+      order={(parsedParagraphs.length + 2)}
       Component={ MyStack }
       showCard={ showCard }
       toggleAnimating={ toggleAnimating }
     />
-  )
+  );
 
   const handleScroll = (e) => {
     if (!animating){
       scrollCount.current += e.deltaY;
-      if (scrollCount.current >= scrollLimiter && showCard < (parsedParagraphs.length + 1)){
-        toggleAnimating();
+      if (scrollCount.current >= scrollLimiter){
         scrollCount.current = 0;
-        const newCard = showCard + 1;
-        setShowCard(newCard);
-      } else if (scrollCount.current <= (scrollLimiter * -1) && showCard > 0){
-        toggleAnimating();
+        if (showCard < (parsedParagraphs.length)){
+          toggleAnimating();
+          const newCard = showCard + 1;
+          setShowCard(newCard);
+        } else if ( showCard === parsedParagraphs.length ){
+          toggleAnimating();
+          const newCard = showCard + 2;
+          setShowCard(newCard);
+        }
+      } else if (scrollCount.current <= (scrollLimiter * -1)){
         scrollCount.current = 0;
-        const newCard = showCard - 1;
-        setShowCard(newCard)
+        if (showCard === (parsedParagraphs.length + 2)){
+          toggleAnimating()
+          setShowCard(parsedParagraphs.length)
+        } else if (showCard > 1){
+          toggleAnimating();
+          const newCard = showCard - 1;
+          setShowCard(newCard)
+        }
       }
     }
-  }
+  };
+
+  useEffect(() => {
+    console.log(showCard);
+  });
+  
   
   return(
     <section 
-      className={ [styles.aboutList, 'max-h-screen relative px-2 overflow-hidden'].join(' ') } 
+      className={ [styles.aboutList, 'relative max-h-screen h-screen relative overflow-hidden'].join(' ') } 
       onWheel={ e=>{ handleScroll(e) }}
     >
-      { parsedParagraphs && parsedParagraphs }
+      { parsedParagraphs }
       { parsedStack }
     </section>
-  )
-}
+  );
+};

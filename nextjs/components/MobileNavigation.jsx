@@ -106,7 +106,7 @@ export default function MobileNavigation({styles}){
           initial={{ translateX: '-100%', left: '100%' }}
           animate={{
             left: '100%',
-            translateX: showMenuObj.show ? '0%' : '-100%', 
+            translateX: showMenuObj.show ? '-100%' : '0%', 
           }}
         >
           <li><Link className="relative ps-4 pe-12 py-6" href='/projects'>Projects</Link></li>

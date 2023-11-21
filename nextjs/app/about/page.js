@@ -14,7 +14,7 @@ export default function About() {
   return (
     <>
     <BackGround styles={ globalStyles }/>
-    <main className={[globalStyles.page, 'w-full h-screen max-h-screen'].join(' ')}>
+    <main className={[globalStyles.page, 'w-full h-screen max-h-screen overflow-visible'].join(' ')}>
       <AboutMe styles={ styles }/>
       <Navigation styles={ globalStyles }/>
       <MobileNavigation styles={ globalStyles } />

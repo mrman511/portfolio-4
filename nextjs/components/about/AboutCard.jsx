@@ -51,7 +51,7 @@ export default function AboutCard({styles, data, Component, showCard, toggleAnim
   }
 
   return(
-    <motion.article className="absolute px-2 flex flex-col justify-center"
+    <motion.article className="absolute w-full px-2 flex flex-col justify-center"
     initial={ initial }
     animate={ animate }
     onAnimationComplete={ ()=>{ setTimeout(()=>{ toggleAnimating() }, 500) } }

@@ -1,4 +1,4 @@
-import { useRef, useState, useEffect} from "react";
+import { useRef, useState} from "react";
 import { useCycle } from "framer-motion";
 import AboutCard from "./AboutCard";
 import AboutParagraph from "./AboutParagraph";
@@ -58,15 +58,11 @@ export default function AboutList({ styles, aboutMe }){
       }
     }
   };
-
-  useEffect(() => {
-    console.log(showCard);
-  });
   
   
   return(
     <section 
-      className={ [styles.aboutList, 'relative max-h-screen h-screen relative overflow-hidden'].join(' ') } 
+      className={ [styles.aboutList, 'relative max-h-screen h-screen overflow-y-hidden'].join(' ') } 
       onWheel={ e=>{ handleScroll(e) }}
     >
       { parsedParagraphs }

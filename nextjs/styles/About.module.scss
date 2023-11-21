@@ -8,10 +8,7 @@
 }
 
 .stackCard{
-
-  .title{
-    color: $offwhite;
-  }
+  color: $offwhite;
 }
 
 .stackBtn{
@@ -20,4 +17,8 @@
   .icon{
     color: rgba($black, .8);
   }
+}
+
+.stackInfo{
+  background-color: rgba($black, .5);
 }

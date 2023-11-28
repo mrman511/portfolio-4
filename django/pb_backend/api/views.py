@@ -23,12 +23,15 @@ def end_points(request):
 
 @api_view(['GET'])
 def projects(request):
-  projects = Project.objects.all()
+  projects = Project.objects.all().order_by('created')
   serializer = ProjectSerializer(projects, many=True)
   for project in serializer.data:
     if (project['mobile_image']):
       str=project['mobile_image']
-      project['image']= getBase64Image(str[1:])
+      project['mobile_image']= getBase64Image(str[1:])
+    if (project['desktop_image']):
+      str=project['desktop_image']
+      project['desktop_image']= getBase64Image(str[1:])
 
   return Response(serializer.data)
 

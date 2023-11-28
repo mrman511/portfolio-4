@@ -20,14 +20,6 @@
   justify-self: end;
 }
 
-.navLinks{
-  color: $offwhite;
-  background: rgba($black, .8);
-
-  .icon {
-    color: $offwhite;
-  }
-}
 
 .navBtn{
   background: rgba($black, .8);
@@ -43,6 +35,17 @@
   }
 }
 
+@media only screen and (max-width: 639px) {
+  .navLinks{
+    color: $offwhite;
+    background: rgba($black, .8);
+
+    .icon {
+      color: $offwhite;
+    }
+  }
+}
+
 
 @media only screen and (min-width: 640px) {
   
@@ -51,6 +54,7 @@
     grid-template: 100vh / calc(100% - 125px) 125px;
     grid-template-areas: 'main nav';
   }
+
   
   .navBtn{
     background: rgba($black, .3);

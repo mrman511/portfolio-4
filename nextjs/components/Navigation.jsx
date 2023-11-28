@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import navLinks from "@/utils/data/navLinks";
 
 
-export default function Navigation({styles}){
+export default function Navigation({styles, transition}){
   const [showMenuObj, setShowMenuObj] = useState({show: false, click: 305});
   const [isAnimating, setIsAnimating] = useState(false)
   const navHeight = useRef();
@@ -18,6 +18,11 @@ export default function Navigation({styles}){
       </Link>
     </div>
   ))
+
+  const handleNavigation = (e, path) => {
+    e.preventDefault();
+    transition(path)
+  }
   
   
   const navSpeed = .2;
@@ -39,7 +44,6 @@ export default function Navigation({styles}){
   }, [setShowMenuObj]);
 
   const handleClick = (e) => {
-    console.log('here');
     if (!isAnimating){
       if (!showMenuObj.show){
         const obj = { show: true }
@@ -107,15 +111,16 @@ export default function Navigation({styles}){
           </motion.div>
         </motion.article>
 
-        <motion.ul id='navLinks' className={[styles.navLinks, "absolute h-[250px] flex flex-col justify-evenly text-lg"].join(' ')}
+        <motion.ul id='navLinks' className={[styles.navLinks, "relative h-auto pb-4 flex flex-col justify-evenly text-lg"].join(' ')}
           key='navLinksList-open'
           // initial={false}
           animate={{ translateY: '-100%', top: `${showMenuObj.click}px` }}
         >
-          <li><Link className="relative ps-4 pe-12 py-6" href='/projects'>Projects</Link></li>
-          <li><Link className="relative ps-4 pe-12 py-6" href='/about'>About</Link></li>
-          <li><Link className="relative ps-4 pe-12 py-6" href=''>Resume</Link></li>
-          <li><Link className="relative ps-4 pe-12 py-6" href=''>Contact</Link></li>
+          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/' onClick={(e)=>{ handleNavigation(e, 'index') }}>Home</Link></li>
+          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/projects' onClick={(e)=>{ handleNavigation(e, 'projects') }}>Projects</Link></li>
+          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/about' onClick={(e)=>{ handleNavigation(e, 'about') }}>About</Link></li>
+          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href=''>Resume</Link></li>
+          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href=''>Contact</Link></li>
           <li>
             <div className="w-full ps-4 flex items-center">
               { parsedNavLinks }

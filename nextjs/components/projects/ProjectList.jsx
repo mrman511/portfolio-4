@@ -11,11 +11,11 @@ export default function ProjectList({styles, projects, globalStyles}){
       globalStyles={globalStyles}
       i={ i }
     />)
-  })
+  });
   
   return (
     <AnimatePresence>
-      <section className={[styles.projectList, "w-full h-min ms-4 flex flex-wrap justify-center overflow-y-scroll"].join(' ')}>
+      <section className={[styles.projectList, "w-full h-full flex flex-wrap justify-center items-center overflow-y-scroll"].join(' ')}>
         { parsedProjects && parsedProjects }
       </section>
     </AnimatePresence>

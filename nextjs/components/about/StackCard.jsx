@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { getInitial, getCardAnimation } from '@/utils/animation/stackCards.js';
 
 function StackLine({styles, lineData }){
   return (
@@ -15,49 +16,6 @@ export default function StackCard({styles, data, i , currentCard}){
     backgroundPosition = '33% 50%';
   }
 
-  const initial = (i === 0) ? {
-    translateX: '-50%',
-    left: '50%',
-    scale: 1,
-    opacity: 1,
-    zIndex: 2,
-  } : {
-    translateX: '-100%',
-    left: '100%',
-    scale: .5,
-    opacity: 0,
-    zIndex: 0,
-  }
-
-  const getCardAnimation = () => {
-    if (currentCard === i){
-      return {
-        translateX: '-50%',
-        left: '50%',
-        scale: 1,
-        opacity: 1,
-        zIndex: 2,
-      }
-    } else if (currentCard > i){
-      return {
-        translateX: '-100%',
-        left: '-1%',
-        scale: .5,
-        opacity: 0,
-        zIndex: 0,
-      }
-    } else if (currentCard < i){
-      console.log('here');
-      return {
-        translateX: '100%',
-        left: '0%',
-        scale: .5,
-        opacity: 0,
-        zIndex: 0,
-      }
-    }
-  }
-
   const parsedTechnologies = data.technologies.map((tech, j) => (
     <StackLine key={ `stack-${i}-tech-${j}` } styles={ styles } lineData={ tech }/>
   ))
@@ -70,8 +28,8 @@ export default function StackCard({styles, data, i , currentCard}){
 
   return (
     <motion.article className={ [styles.stackCard, 'absolute w-11/12 max-w-[400px] items-center justify-between rounded-xl overflow-hidden'].join(' ') }
-      initial={ initial }
-      animate={ getCardAnimation() }
+      initial={ getInitial(i) }
+      animate={ getCardAnimation(currentCard, i) }
       transition={{ duration: .5 }}
     >
       <div className="absolute w-full h-full z-0">

@@ -1,15 +1,10 @@
 @import './variable.scss';
 
-
 .background{
   background: linear-gradient(-65deg, $offwhite, $beige, $offwhite);
   z-index: -1;
 }
 
-.projectList{
-  grid-area: 'page';
-  perspective: 1000;
-}
 
 .cardOuter{
   transform-style: preserve-3d;
@@ -51,6 +46,11 @@
     transform-style: preserve-3d;
     transform: translateZ(80px);
   }
+}
+
+.cardInfo{
+  color: $offwhite;
+  background-color: rgba($black, .5);
 }
 
 @media (prefers-color-scheme: dark){

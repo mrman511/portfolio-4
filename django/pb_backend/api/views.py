@@ -3,7 +3,10 @@ from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from projects.serializers import ProjectSerializer
 from about_me.serializers import ParagraphSerializer, StackSerializer
-from .helpers import getBase64Image
+from .helpers import getBase64Image, getBase64File
+
+from users.models import Profile
+from users.serializers import ProfileSerializer
 
 from projects.models import Project
 from about_me.models import Paragraph, Stack
@@ -18,6 +21,9 @@ def end_points(request):
     'projects': {
       'GET': 'api/projects/'
     },
+    'profile': {
+      'GET': 'api/profile'
+    }
   }
   return Response(endpoints)
 
@@ -47,3 +53,9 @@ def about(request):
   paragrph_serializer = ParagraphSerializer(paragraphs, many=True)
 
   return Response({'stacks': stack_serializer.data, 'paragraphs': paragrph_serializer.data})
+
+@api_view(['GET'])
+def profile(request):
+  profile = Profile.objects.get(id=1)
+  serializer = ProfileSerializer(profile, many=False).data
+  return Response(serializer)

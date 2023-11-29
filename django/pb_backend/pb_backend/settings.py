@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'languages.apps.LanguagesConfig',
     'frameworks.apps.FrameworksConfig',
     'technologies.apps.TechnologiesConfig',
+    'users.apps.UsersConfig',
 ]
 
 MIDDLEWARE = [
@@ -132,7 +133,7 @@ STATICFILES_DIRS = [
 
 # Media files (images and files)
 # MEDIA_URL = 'media/'
-MEDIA_ROOT = BASE_DIR / 'static/images'
+MEDIA_ROOT = BASE_DIR / 'static'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field

@@ -119,7 +119,7 @@ export default function Navigation({styles, transition}){
           <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/' onClick={(e)=>{ handleNavigation(e, 'index') }}>Home</Link></li>
           <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/projects' onClick={(e)=>{ handleNavigation(e, 'projects') }}>Projects</Link></li>
           <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/about' onClick={(e)=>{ handleNavigation(e, 'about') }}>About</Link></li>
-          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href=''>Resume</Link></li>
+          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/resume' onClick={(e)=>{ handleNavigation(e, 'resume') }}>Resume</Link></li>
           <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href=''>Contact</Link></li>
           <li>
             <div className="w-full ps-4 flex items-center">

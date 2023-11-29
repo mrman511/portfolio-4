@@ -5,6 +5,7 @@ import MobileNavigation from "./MobileNavigation";
 import Hero from '@/components/Hero';
 import ProjectPage from "./projects/ProjectPage";
 import AboutPage from "./about/AboutPage";
+import ResumePage from "./resume/ResumePage";
 
 import useVisualMode from "@/utils/helpers/useVisualMode";
 
@@ -19,6 +20,7 @@ export default function Page({styles}){
       { mode === 'INDEX' && <Hero />}
       { mode === 'PROJECTS' && <ProjectPage globalStyles={ styles }/> }
       { mode === 'ABOUT' && <AboutPage globalStyles={ styles }/> }
+      { mode === 'RESUME' && <ResumePage globalStyles={  styles }/> }
     </main>
   );
 };

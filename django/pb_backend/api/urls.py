@@ -5,7 +5,7 @@ urlpatterns = [
   path('', views.end_points),
   path('projects/', views.projects),
   path('about/', views.about),
-  # path(),
+  path('profile/', views.profile),
   # path(),
   # path(),
   # path(),

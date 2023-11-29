@@ -1,8 +1,6 @@
 import BackGround from '@/components/Background';
-// import Navigation from '@/components/Navigation';
-// import MobileNavigation from '@/components/MobileNavigation';
 import globalStyles from '@/styles/Global.module.scss';
-import Page from "@/components/Page"; 
+import Page from "@/components/Page";
 
 export const metadata = {
   title: 'Paul Bodner Portfolio',

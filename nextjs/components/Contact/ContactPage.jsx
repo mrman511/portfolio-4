@@ -1,12 +1,12 @@
 'use client'
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useRef } from 'react';
 
 import ContactForm from './Form';
 import Header from './Header';
 import styles from '@/styles/Contact.module.scss';
 
-
+import { sendEmail } from '@/utils/api/sendEmail';
 
 export default function ContactPage({globalStyles}){
   const [errObj, setErrObj] = useState({})
@@ -19,7 +19,7 @@ export default function ContactPage({globalStyles}){
     if (formErrors){
       setErrObj(prev=>({ ...formErrors }))
     } else {
-      console.log('send message');
+      sendEmail(formData)
     }
   }
 

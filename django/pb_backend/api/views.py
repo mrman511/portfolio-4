@@ -1,15 +1,19 @@
-import base64
+from django.core.mail import send_mail
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
+
 from projects.serializers import ProjectSerializer
 from about_me.serializers import ParagraphSerializer, StackSerializer
-from .helpers import getBase64Image, getBase64File
+from .helpers import getBase64Image
 
 from users.models import Profile
+from django.contrib.auth.models import User
 from users.serializers import ProfileSerializer
 
 from projects.models import Project
 from about_me.models import Paragraph, Stack
+
+from pprint import pprint
 
 # Create your views here.
 @api_view(['GET'])
@@ -59,3 +63,13 @@ def profile(request):
   profile = Profile.objects.get(id=1)
   serializer = ProfileSerializer(profile, many=False).data
   return Response(serializer)
+
+@api_view(['POST'])
+def contact(request):
+  adminEmail = User.objects.get(id=1).email
+  msgData = request.data
+  text = msgData['message'] + '\n\nFrom:\n' + msgData['name'] + '\n' + msgData['email']
+  print(msgData['email'])
+  send_mail(msgData['subject'], text, msgData['email'], [adminEmail], fail_silently=False)
+
+  return Response({'status': 200})

@@ -1,0 +1,11 @@
+@import './variables.scss';
+
+.input{
+  border: 2px solid $black;
+}
+
+@media (prefers-color-scheme: dark){
+  .input{
+    border: 2px solid $beige;
+  }
+}

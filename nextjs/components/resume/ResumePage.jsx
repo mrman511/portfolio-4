@@ -9,7 +9,6 @@ export default function ResumePage({ globalStyles }){
     if (!profile){
       getProfile(setProfile);
     }
-    console.log(profile);
   }, [profile]);
 
   return (

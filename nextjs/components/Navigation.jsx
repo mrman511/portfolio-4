@@ -19,9 +19,9 @@ export default function Navigation({styles, transition}){
     </div>
   ))
 
-  const handleNavigation = (e, path) => {
+  const handleNavigation = (e) => {
     e.preventDefault();
-    transition(path)
+    transition(e.target.href.split('/').pop())
   }
   
   
@@ -116,11 +116,11 @@ export default function Navigation({styles, transition}){
           // initial={false}
           animate={{ translateY: '-100%', top: `${showMenuObj.click}px` }}
         >
-          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/' onClick={(e)=>{ handleNavigation(e, 'index') }}>Home</Link></li>
-          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/projects' onClick={(e)=>{ handleNavigation(e, 'projects') }}>Projects</Link></li>
-          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/about' onClick={(e)=>{ handleNavigation(e, 'about') }}>About</Link></li>
-          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/resume' onClick={(e)=>{ handleNavigation(e, 'resume') }}>Resume</Link></li>
-          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href=''>Contact</Link></li>
+          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/' onClick={(e)=>{ handleNavigation(e) }}>Home</Link></li>
+          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/projects' onClick={(e)=>{ handleNavigation(e) }}>Projects</Link></li>
+          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/about' onClick={(e)=>{ handleNavigation(e) }}>About</Link></li>
+          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/resume' onClick={(e)=>{ handleNavigation(e) }}>Resume</Link></li>
+          <li className="relative ps-4 pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/contact' onClick={(e)=>{ handleNavigation(e) }}>Contact</Link></li>
           <li>
             <div className="w-full ps-4 flex items-center">
               { parsedNavLinks }

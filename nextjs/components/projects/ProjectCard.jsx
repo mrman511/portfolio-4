@@ -1,8 +1,7 @@
 'use client'
 import Image from "next/image";
 import Link from "next/link";
-import defaultImage from '@/public/images/default.jpeg';
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef} from "react";
 import { motion, useCycle } from "framer-motion";
 import CardFront from "./CardFront";
 import CardBack from "./CardBack";
@@ -21,7 +20,7 @@ export default function ProjectCard({styles, project, i}){
   }
 
   return (
-    <motion.section ref={cardRef} className={[styles.cardOuter, "relative w-[98%] sm:w-11/12 md:w-[49%] xl:w-[32%] h-80 overflow-hidden"].join(' ')}
+    <motion.section ref={cardRef} className={[styles.cardOuter, "relative w-[200px] h-80 sm:w-[250px] sm:h-96 overflow-hidden"].join(' ')}
       initial={{ 
         rotateX: 90,
         originY: '0%' 

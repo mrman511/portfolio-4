@@ -11,7 +11,7 @@ class Paragraph(models.Model):
 class Stack(models.Model):
   title=models.CharField(max_length=100, null=True, blank=True)
   description=models.TextField(max_length=1000, blank=True, null=True)
-  image=models.ImageField(null=True, blank=True)
+  image=models.ImageField(upload_to='images/stack-images/', null=True, blank=True)
 
   languages=models.ManyToManyField(Language)
   frameworks=models.ManyToManyField(Framework)

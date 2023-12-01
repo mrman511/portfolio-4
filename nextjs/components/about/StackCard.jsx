@@ -34,7 +34,7 @@ export default function StackCard({styles, data, i , currentCard}){
     >
       <div className="absolute w-full h-full z-0">
         <Image 
-          src={'data:image/jpeg;base64,' + data.image}
+          src={process.env.NEXT_PUBLIC_STATIC_ROUTE + data.image}
           alt={ data.title }
           fill
           style={{ objectFit: 'cover', objectPosition: backgroundPosition }}

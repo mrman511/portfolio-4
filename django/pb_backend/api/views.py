@@ -4,7 +4,6 @@ from rest_framework.response import Response
 
 from projects.serializers import ProjectSerializer
 from about_me.serializers import ParagraphSerializer, StackSerializer
-from .helpers import getBase64Image
 
 from users.models import Profile
 from django.contrib.auth.models import User
@@ -27,6 +26,17 @@ def end_points(request):
     },
     'profile': {
       'GET': 'api/profile'
+    },
+    'contact': {
+      'POST': {
+        'path': 'api/contact',
+        'body': {
+          'name': 'string',
+          'email': 'string',
+          'subject': 'string',
+          'message': 'string',
+        },
+      } 
     }
   }
   return Response(endpoints)
@@ -35,13 +45,6 @@ def end_points(request):
 def projects(request):
   projects = Project.objects.all().order_by('created')
   serializer = ProjectSerializer(projects, many=True)
-  for project in serializer.data:
-    if (project['mobile_image']):
-      str=project['mobile_image']
-      project['mobile_image']= getBase64Image(str[1:])
-    if (project['desktop_image']):
-      str=project['desktop_image']
-      project['desktop_image']= getBase64Image(str[1:])
 
   return Response(serializer.data)
 
@@ -49,10 +52,6 @@ def projects(request):
 def about(request):
   stacks = Stack.objects.all()
   stack_serializer = StackSerializer(stacks, many=True)
-  for stack in stack_serializer.data:
-    str=stack['image']
-    stack['image']= getBase64Image(str[1:])
-
   paragraphs = Paragraph.objects.all().order_by('order')
   paragrph_serializer = ParagraphSerializer(paragraphs, many=True)
 

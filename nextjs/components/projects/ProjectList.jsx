@@ -12,6 +12,7 @@ export default function ProjectList({styles, projects, globalStyles}){
       i={ i }
     />)
   });
+  // console.log(projects);
   
   return (
     <AnimatePresence>

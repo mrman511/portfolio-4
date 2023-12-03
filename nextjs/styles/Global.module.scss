@@ -16,8 +16,8 @@
 }
 
 .navigation{
-  grid-area: nav;
-  justify-self: end;
+  // grid-area: nav;
+  // justify-self: end;
 }
 
 
@@ -49,11 +49,11 @@
 
 @media only screen and (min-width: 640px) {
   
-  .page{
-    display: grid;
-    grid-template: 100vh / calc(100% - 125px) 125px;
-    grid-template-areas: 'main nav';
-  }
+  // .page{
+  //   display: grid;
+  //   grid-template: 100vh / calc(100% - 125px) 125px;
+  //   grid-template-areas: 'main nav';
+  // }
 
   
   .navBtn{

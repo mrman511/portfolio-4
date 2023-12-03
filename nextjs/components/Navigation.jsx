@@ -8,27 +8,11 @@ import navLinks from "@/utils/data/navLinks";
 import McButton from "./McButton";
 
 
-export default function Navigation({styles, transition}){
-  const [showMenuObj, setShowMenuObj] = useState({show: false, click: 305});
+export default function Navigation({styles, transition, showMenuObj,setShowMenuObj}){
   const [isAnimating, setIsAnimating] = useState(false)
   const navHeight = useRef();
-
-  const parsedNavLinks = navLinks.map(link=>(
-    <div key={`nav-icon-${link.title}`} className={["relative w-6 h-6 me-4"].join(' ')}>
-      <Link href={link.path}>
-        <FontAwesomeIcon className={ [styles.icon, 'w-full h-full'].join(' ') } icon={link.icon}/>
-      </Link>
-    </div>
-  ))
-
-  const handleNavigation = (e) => {
-    e.preventDefault();
-    const str = e.target.href.split('/').pop();
-    transition( str ? str : 'index');
-  }
   
-  
-  const navSpeed = .2;
+  const navSpeed = .4;
   const btnTransition = {
     duration: navSpeed,
     width: { delay: showMenuObj.show ? navSpeed : 0 },
@@ -38,13 +22,11 @@ export default function Navigation({styles, transition}){
     transform: { delay: showMenuObj.show ? navSpeed: 0 },
   };
   
-  useEffect(() => {
-    const nav = document.getElementById('navLinks');
-    if(nav){
-      const height = nav.clientHeight;
-      navHeight.current = height
-    }
-  }, [setShowMenuObj]);
+  const handleNavigation = (e) => {
+    e.preventDefault();
+    const str = e.target.href.split('/').pop();
+    transition( str ? str : 'index');
+  }
 
   const handleClick = (e) => {
     if (!isAnimating){
@@ -63,11 +45,31 @@ export default function Navigation({styles, transition}){
     }
   };
   
+  const parsedNavLinks = navLinks.map(link=>(
+    <div key={`nav-icon-${link.title}`} className={["relative w-6 h-6 me-4"].join(' ')}>
+      <Link href={link.path}>
+        <FontAwesomeIcon className={ [styles.icon, 'w-full h-full'].join(' ') } icon={link.icon}/>
+      </Link>
+    </div>
+  ))
+  
+  useEffect(() => {
+    const nav = document.getElementById('navLinks');
+    if(nav){
+      const height = nav.clientHeight;
+      navHeight.current = height
+    }
+  }, [setShowMenuObj]);
 
   return(
     <AnimatePresence initial={ false }>
-      <section className={[styles.navigation, "relative h-screen justify-self-stretch right-0 z-10"].join(' ')}>
-        <motion.nav className='absolute w-[125px] h-screen right-0 z-10'
+      <motion.section className={[styles.navigation, "relative h-screen z-10"].join(' ')}
+        animate={{ 
+          // width: showMenuObj.show ? '125px' : '0px',
+          transition: { duration: navSpeed } 
+        }}
+      >
+        <motion.nav className='relative w-[125px] h-screen z-10'
         key='navigation-open'
         // initial={false}
         animate={{
@@ -95,6 +97,7 @@ export default function Navigation({styles, transition}){
             key='navLinksList-open'
             // initial={false}
             animate={{ translateY: '-100%', top: `${showMenuObj.click}px` }}
+            // transition={{ delay: navSpeed }}
           >
             <li className="relative pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/' onClick={(e)=>{ handleNavigation(e) }}>Home</Link></li>
             <li className="relative pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/projects' onClick={(e)=>{ handleNavigation(e) }}>Projects</Link></li>
@@ -109,7 +112,7 @@ export default function Navigation({styles, transition}){
 
           </motion.ul>
         </motion.nav>
-      </section>
+      </motion.section>
     </AnimatePresence>
   );
 }

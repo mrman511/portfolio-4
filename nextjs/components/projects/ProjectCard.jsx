@@ -8,11 +8,12 @@ import CardBack from "./CardBack";
 
 export default function ProjectCard({styles, project, i}){
   const [isFlipped, toggleIsFlipped] = useCycle(false, true);
+  const [showStack, toggleShowStack] = useCycle(false, true);
   const [isAnimating, setIsAnimating] = useState(false);
   const [finishedInitialAnimation, toggleFinishedInitialAnimation] = useCycle(false, true);
   const cardRef = useRef(null);
 
-  const handleFlip = () => {
+  const handleFlip = (e) => {
     if (!isAnimating){
       toggleIsFlipped();
       setIsAnimating(true);
@@ -20,7 +21,7 @@ export default function ProjectCard({styles, project, i}){
   }
 
   return (
-    <motion.section ref={cardRef} className={[styles.cardOuter, "relative w-[200px] h-80 sm:w-[250px] sm:h-96 overflow-hidden"].join(' ')}
+    <motion.section ref={cardRef} className={[styles.cardOuter, "relative w-[260px] h-96 overflow-hidden"].join(' ')}
       initial={{ 
         rotateX: 90,
         originY: '0%' 
@@ -49,13 +50,38 @@ export default function ProjectCard({styles, project, i}){
           onAnimationComplete={()=> setIsAnimating(false) }
         >
           <CardFront styles={styles} Image={Image} project={project}/>
-          <CardBack styles={styles} cardRef={cardRef} Image={Image} Link={Link} project={project}/>
+          <CardBack styles={styles} cardRef={cardRef} Image={Image} Link={Link} project={project} showStack={ showStack }/>
         </motion.div>
       </article>
-      {/* {!finishedInitialAnimation && <article className={[styles.back, "w-full h-full"]}>
-        <div className={[styles.background, "absolute w-[100vw] h-[100vh]"].join(' ')}>
-        </div>
-      </article>} */}
+
+      <motion.div className="absolute w-full flex justify-evenly z-20"
+      animate={{
+        top: isFlipped ? '85%' : '100%',
+        opacity: isFlipped ? 1 : 0,
+      }}
+      transition={{ delay: isFlipped ? .5 : 0 }}
+      >
+        { project.live_link && <Link className='relative' href={ project.live_link }>
+          <button className={[styles.btn, styles.cardInfo,  "px-3 py-2 rounded-lg"].join(' ')}>View Live</button>
+        </Link> }
+        <motion.button 
+          onClick={ toggleShowStack } 
+          className={[styles.btn, styles.cardInfo,  "px-3 py-2 rounded-lg"].join(' ')}
+          // animate={{
+          //   top: showStack ? '100%': '0%',  
+          // }}
+          // transition={{ delay: showStack ? 0 : .2 }}
+        >{showStack ? 'Description' : 'View Stack'}</motion.button>
+
+        {/* <motion.button 
+          onClick={ toggleShowStack } 
+          className={[styles.btn, styles.cardInfo,  "px-3 py-2 rounded-lg"].join(' ')}
+          animate={{
+            top: showStack ? '0%': '100%',  
+          }}
+          transition={{ delay: showStack ? .2 : 0 }}
+        >Description</motion.button> */}
+      </motion.div>
     </motion.section>
   )
 }

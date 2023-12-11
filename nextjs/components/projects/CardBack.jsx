@@ -1,38 +1,37 @@
+import {  motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
+import StackCardList from "../StackCardList";
+import { ST } from "next/dist/shared/lib/utils";
 
-const CardLine = ({ styles, lineData }) => {
-  return (
-    <li className="m-2">{ lineData.name }</li>
-  );
-}
+export default function CardBack({ styles, cardRef, Image, Link, project, showStack }){
 
-export default function CardBack({ styles, cardRef, Image, Link, project }){
+  const parsedLanguages = <StackCardList 
+    key={ `${project.title}-languages` } 
+    styles={ styles } 
+    dataArr={ project.languages }
+    isCol={ true }
+    title='Languages'
+  />
 
-  const parsedLanguages = project.languages.map(language=>(
-    <CardLine key={ `${project.title}-${language.name}` } styles={ styles } lineData={ language }/>
-  ));
-  const parsedFrameworks = project.frameworks.map(framework=>(
-    <CardLine key={ `${project.title}-${framework.name}` } styles={ styles } lineData={ framework }/>
-  ));
-  const parsedTechnologies = project.technologies.map(technology=>(
-    <CardLine key={ `${project.title}-${technology.name}` } styles={ styles } lineData={ technology }/>
-  ));
+  const parsedFrameworks = <StackCardList 
+    key={ `${project.title}-frameworks` } 
+    styles={ styles } 
+    dataArr={ project.frameworks }
+    isCol={ true }
+    title='Frameworks'
+    />
+
+
+  const parsedTechnologies = <StackCardList 
+    key={ `${project.title}-technologies` } 
+    styles={ styles } 
+    dataArr={ project.technologies }
+    title='Technologies'
+  />
 
   return(
-    <div className={[styles.back, "relative top-0 w-full h-full sm:px-6 md:px-0 flex flex-col items-center justify-around overflow-hidden"].join(' ')}>
-      <div className="absolute w-full h-full z-0">
-        <Image 
-          src={ 'data:image/png;base64,' + project.desktop_image }
-          fill
-          alt={ project.title }
-          style={{
-            objectFit: 'cover',
-            objectPosition: 'top',
-          }}
-          sizes='200px'
-        />
-      </div>
+    <div className={[styles.back, "relative top-0 w-full h-full sm:px-6 md:px-0 flex items-center justify-center overflow-hidden"].join(' ')}>
 
       <div className={[styles.icons, "absolute px-2 pe-2 py-1 top-0 right-0 flex z-10 "].join(' ')}>
         <Link href={project.github_link} className="relative">
@@ -40,22 +39,29 @@ export default function CardBack({ styles, cardRef, Image, Link, project }){
         </Link>
       </div>
 
-      <div className="relative w-full h-full flex flex-col p-2">
-        <div className={ [styles.cardInfo, "flex justify-center p-2 m-2"].join(' ') }>
-          <h3>{ project.title }</h3>
-        </div>
-        <div className={[styles.cardInfo, "px-2 py-2 text-center"].join(' ')}>
+      <motion.article className="absolute w-full flex flex-col p-2 pb-12"
+        animate={{
+          opacity: showStack ? 0 : 1,
+        }}
+        transition={{ delay: showStack ? 0 : .3 }}
+      >
+        <div className={[styles.cardInfo, "px-2 py-2 max-h-64 text-center overflow-scroll"].join(' ')}>
           <p>{project.description}</p>
         </div>
-      </div>
+      </motion.article>
 
-      { project.live_link && <div className="absolute w-full bottom-2">
-        <Link className='relative ms-4' href={ project.live_link }>
-          <button className={[styles.btn, styles.cardInfo,  "px-4 py-2 rounded-lg"].join(' ')}>View Live</button>
-        </Link>
-      </div> }
-
-
+      <motion.article className="absolute w-full h-full flex flex-col justify-center items-center pb-12"
+        animate={{
+          opacity: showStack ? 1 : 0,
+        }}
+        transition={{ delay: showStack ? .3 : 0 }}
+      >
+        <div className={["relative w-full flex justify-evenly items-stretch overflow-scroll mb-4"].join(' ')}>
+          { parsedLanguages }
+          { parsedFrameworks }
+        </div>
+        { parsedTechnologies }
+      </motion.article>
     </div>
   );
 }

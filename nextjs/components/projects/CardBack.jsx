@@ -33,19 +33,23 @@ export default function CardBack({ styles, cardRef, Image, Link, project, showSt
   return(
     <div className={[styles.back, "relative top-0 w-full h-full sm:px-6 md:px-0 flex items-center justify-center overflow-hidden"].join(' ')}>
 
-      <div className={[styles.icons, "absolute px-2 pe-2 py-1 top-0 right-0 flex z-10 "].join(' ')}>
+      <motion.div 
+        className={[styles.icons, "absolute px-2 pe-2 mt-2 top-0 right-0 flex z-10 "].join(' ')}
+        whileHover={{ scale: 1.5 }}
+      >
         <Link href={project.github_link} className="relative">
-          <FontAwesomeIcon icon={ faGithub } className={[styles.icon, 'w-5 h-5'].join(' ')} />
+          <FontAwesomeIcon icon={ faGithub } className={[styles.icon, 'w-6 h-6'].join(' ')} />
         </Link>
-      </div>
+      </motion.div>
 
-      <motion.article className="absolute w-full flex flex-col p-2 pb-12"
+      <motion.article className="absolute w-full max-h-60 flex flex-col p-2 pb-18 overflow-scroll"
         animate={{
           opacity: showStack ? 0 : 1,
+          zIndex: showStack ? 0 : 1,
         }}
         transition={{ delay: showStack ? 0 : .3 }}
       >
-        <div className={[styles.cardInfo, "px-2 py-2 max-h-64 text-center overflow-scroll"].join(' ')}>
+        <div className={[styles.cardInfo, "px-2 py-2  text-center"].join(' ')}>
           <p>{project.description}</p>
         </div>
       </motion.article>
@@ -53,6 +57,7 @@ export default function CardBack({ styles, cardRef, Image, Link, project, showSt
       <motion.article className="absolute w-full h-full flex flex-col justify-center items-center pb-12"
         animate={{
           opacity: showStack ? 1 : 0,
+          zIndex: showStack ? 1 : 0,
         }}
         transition={{ delay: showStack ? .3 : 0 }}
       >

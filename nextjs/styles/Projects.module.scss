@@ -28,11 +28,7 @@
 .back{
   transform: rotateY(180deg);
   transform-style: preserve-3d;
-  // border: 2px solid $lightgrey;
-  // transform: translateZ(-80px);
-
   .icons {
-    background-color: rgba($black, .25);
     transform-style: preserve-3d;
     transform: translateZ(80px);
   }
@@ -49,12 +45,16 @@
 }
 
 .cardInfo{
-  color: $offwhite;
-  background-color: rgba($black, .5);
+  color: $black;
+  // background-color: rgba($black, .5);
 }
 
 @media (prefers-color-scheme: dark){
   .background{
     background: linear-gradient(-65deg, black, $black, black);
+  }
+  .cardInfo{
+    color: $offwhite;
+    // background-color: rgba($black, .5);
   }
 }

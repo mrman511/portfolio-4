@@ -4,7 +4,17 @@ import { getInitial, getCardAnimation } from '@/utils/animation/stackCards.js';
 
 function StackLine({styles, lineData }){
   return (
-    <li className="m-2">{ lineData.name }</li>
+    <li className="m-2 flex items-center">
+      {lineData.image && <div className="relative w-8 h-8">
+        <Image 
+          src={ process.env.NEXT_PUBLIC_STATIC_ROUTE + lineData.image }
+          alt={ lineData.name }
+          fill
+          style={{ objectFit: 'cover' }}
+        />
+      </div>}
+      { lineData.name }
+    </li>
   );
 }
 

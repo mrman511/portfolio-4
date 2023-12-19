@@ -32,7 +32,7 @@ export default function CardBack({ styles, cardRef, Image, Link, project, showSt
 
   return(
     <div className={[styles.back, "relative top-0 w-full h-full sm:px-6 md:px-0 flex items-center justify-center overflow-hidden"].join(' ')}>
-
+      <p className="absolute top-2 left-2 w-10/12 font-semibold">{ project.title }</p>
       <motion.div 
         className={[styles.icons, "absolute px-2 pe-2 mt-2 top-0 right-0 flex z-10 "].join(' ')}
         whileHover={{ scale: 1.5 }}

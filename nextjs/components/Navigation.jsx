@@ -9,7 +9,7 @@ import McButton from "./McButton";
 
 
 export default function Navigation({styles, transition, showMenuObj,setShowMenuObj}){
-  const [isAnimating, setIsAnimating] = useState(false)
+  const [isAnimating, setIsAnimating] = useState(false);
   const navHeight = useRef();
   
   const navSpeed = .4;
@@ -26,7 +26,7 @@ export default function Navigation({styles, transition, showMenuObj,setShowMenuO
     e.preventDefault();
     const str = e.target.href.split('/').pop();
     transition( str ? str : 'index');
-  }
+  };
 
   const handleClick = (e) => {
     if (!isAnimating){
@@ -63,27 +63,33 @@ export default function Navigation({styles, transition, showMenuObj,setShowMenuO
 
   return(
     <AnimatePresence initial={ false }>
-      <motion.section className={[styles.navigation, "relative h-screen z-10"].join(' ')}
+      <motion.section className={[styles.navigation, "absolute h-screen z-10"].join(' ')}
+      initial={{ 
+        width: '51px',
+        right: '0px',
+      }}
         animate={{ 
-          // width: showMenuObj.show ? '125px' : '0px',
+          width: showMenuObj.show ? '125px' : '51px',
+          right: '0px',
           transition: { duration: navSpeed } 
         }}
+        transition={{ width: { delay: showMenuObj.show ? navSpeed : navSpeed } }}
       >
-        <motion.nav className='relative w-[125px] h-screen z-10'
-        key='navigation-open'
-        // initial={false}
-        animate={{
-          translateX: showMenuObj.show ? '0%' : '100%' ,
-          transition: { duration: navSpeed }
-        }}
+        <motion.nav className='absolute w-[125px] h-screen z-10'
+          key='navigation-open'
+          // initial={false}
+          animate={{
+            // translateX: showMenuObj.show ? '0px' : '51px' ,
+            transition: { duration: navSpeed }
+          }}
         >
           <motion.article onClick={(e)=>{ handleClick(e) }} className={[styles.navBtn, "absolute flex justify-center items-center"].join(' ')}
             key='navBtn-open'
             // initial={false}
             animate={{
-              transform: showMenuObj.show ? 'translateX(0)': 'translateX(-100%)', 
+              // transform: showMenuObj.show ? 'translateX(0)': 'translateX(-100%)', 
               height: showMenuObj.show ? 'auto' : '100vh', 
-              width: showMenuObj.show ? '100%' : 'auto',
+              width: showMenuObj.show ? '125px' : '51px',
               top: showMenuObj.show ? `${showMenuObj.click}px`: '0px',
               paddingRight: showMenuObj.show ? '25px': '0px',
             }}
@@ -96,8 +102,12 @@ export default function Navigation({styles, transition, showMenuObj,setShowMenuO
           <motion.ul id='navLinks' className={[styles.navLinks, "relative h-auto pb-4 flex flex-col justify-evenly text-lg"].join(' ')}
             key='navLinksList-open'
             // initial={false}
-            animate={{ translateY: '-100%', top: `${showMenuObj.click}px` }}
-            // transition={{ delay: navSpeed }}
+            animate={{ 
+              translateY: '-100%',
+              translateX: showMenuObj.show ? '0px' : '51px',
+              top: `${showMenuObj.click}px` 
+            }}
+            // transition={{ translateX: {delay: showMenuObj.show ? navSpeed : 0} }}
           >
             <li className="relative pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/' onClick={(e)=>{ handleNavigation(e) }}>Home</Link></li>
             <li className="relative pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/projects' onClick={(e)=>{ handleNavigation(e) }}>Projects</Link></li>

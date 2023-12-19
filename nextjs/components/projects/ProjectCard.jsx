@@ -55,11 +55,11 @@ export default function ProjectCard({styles, project, i}){
       </article>
 
       <motion.div className="absolute w-full flex justify-evenly z-20"
-      animate={{
-        top: isFlipped ? '85%' : '100%',
-        opacity: isFlipped ? 1 : 0,
-      }}
-      transition={{ delay: isFlipped ? .5 : 0 }}
+        animate={{
+          top: isFlipped ? '85%' : '100%',
+          opacity: isFlipped ? 1 : 0,
+        }}
+        transition={{ delay: isFlipped ? .5 : 0 }}
       >
         { project.live_link && <Link className='relative' href={ project.live_link }>
           <button className={[styles.btn, styles.cardInfo,  "px-3 py-2 rounded-lg"].join(' ')}>View Live</button>
@@ -70,7 +70,7 @@ export default function ProjectCard({styles, project, i}){
         >{showStack ? 'Description' : 'View Stack'}</motion.button>
       </motion.div>
 
-      <motion.div className="absolute w-11/12 py-4 flex justify-evenly z-20 bg-offblack text-offwhite bg-opacity-70 rounded-md"
+      <motion.div className="absolute w-11/12 py-4 flex justify-evenly z-20 bg-offblack text-offwhite bg-opacity-70 dark:bg-beige dark:text-offblack dark:bg-opacity-70 rounded-md"
       initial={{ top: '100%', translateX: '-50%', left: '50%'  }}
       animate={{
         top: isFlipped ? '100%' : '75%',

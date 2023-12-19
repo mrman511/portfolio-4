@@ -16,7 +16,6 @@ export default function ContactForm({styles, formRef, handleFormSubmit}){
             type='text' 
             name='name' 
             placeholder="Name"
-            defaultValue='Paul Bodner'
           />
         </div>
 
@@ -26,7 +25,6 @@ export default function ContactForm({styles, formRef, handleFormSubmit}){
             type='email' 
             name='email' 
             placeholder="Email"
-            defaultValue='bodner80@gmail.com'
           />
         </div>
 
@@ -36,7 +34,6 @@ export default function ContactForm({styles, formRef, handleFormSubmit}){
             type='text' 
             name='subject' 
             placeholder="Subject"
-            defaultValue='testing testing'
           />
         </div>
         
@@ -46,7 +43,6 @@ export default function ContactForm({styles, formRef, handleFormSubmit}){
             type='text' 
             name='message' 
             placeholder="Please type your message here."
-            defaultValue='This is a test of my protfolio contact functionality.'
           />
         </div>
 

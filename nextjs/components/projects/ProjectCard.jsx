@@ -38,7 +38,7 @@ export default function ProjectCard({styles, project, i}){
       onAnimationComplete={()=> toggleFinishedInitialAnimation() }
     >
 
-      <article onClick={(e)=>{handleFlip(e)}} className={[styles.projectCard, styles.front, "w-full h-full"].join(' ')}>
+      <article onClick={(e)=>{handleFlip(e)}} className={[styles.projectCard, styles.front, "w-full h-full hover:cursor-pointer"].join(' ')}>
         <motion.div className={[styles.inner, "relative w-full h-full bottom-0"].join(' ')}
           initial={false}
           animate={{ rotateY: isFlipped? 180 : 0 }}
@@ -67,21 +67,20 @@ export default function ProjectCard({styles, project, i}){
         <motion.button 
           onClick={ toggleShowStack } 
           className={[styles.btn, styles.cardInfo,  "px-3 py-2 rounded-lg"].join(' ')}
-          // animate={{
-          //   top: showStack ? '100%': '0%',  
-          // }}
-          // transition={{ delay: showStack ? 0 : .2 }}
         >{showStack ? 'Description' : 'View Stack'}</motion.button>
-
-        {/* <motion.button 
-          onClick={ toggleShowStack } 
-          className={[styles.btn, styles.cardInfo,  "px-3 py-2 rounded-lg"].join(' ')}
-          animate={{
-            top: showStack ? '0%': '100%',  
-          }}
-          transition={{ delay: showStack ? .2 : 0 }}
-        >Description</motion.button> */}
       </motion.div>
+
+      <motion.div className="absolute w-11/12 py-4 flex justify-evenly z-20 bg-offblack text-offwhite bg-opacity-70 rounded-md"
+      initial={{ top: '100%', translateX: '-50%', left: '50%'  }}
+      animate={{
+        top: isFlipped ? '100%' : '75%',
+        opacity: isFlipped ? 0 : 1,
+      }}
+      transition={{ delay: isFlipped ? 0 : .5 }}
+      >
+        <h2 className="text-xl text-center">{ project.title }</h2>
+      </motion.div>
+        
     </motion.section>
   )
 }

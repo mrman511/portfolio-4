@@ -28,7 +28,7 @@ export default function BackGround({ styles }){
   return(
     <div ref={background} className={[styles.background, styles.mouseMoveGradientTracking,'fixed w-screen h-screen max-h-screen'].join(' ')}>
         { particleColour && < ParticleRipple
-          colSpacing={ 10 }
+          colSpacing={ 15 }
           rowSpacing={ null }
           particleColor={ [...particleColour, .5] }
           particleColorFade={ null }
@@ -39,9 +39,9 @@ export default function BackGround({ styles }){
           particleRadiusFunction={ null }
           maxRadius={ 200 }
           maxRadiusFunction={ null }
-          // includeStatic={ true }
-          // staticParticleMaxRadius={ .5 }
-          // staticParticleColor={ [...particleColour, .3] }
+          includeStatic={ true }
+          staticParticleMaxRadius={ .5 }
+          staticParticleColor={ [...particleColour, .6] }
         />}
       </div>
   );

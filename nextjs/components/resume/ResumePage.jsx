@@ -13,16 +13,16 @@ export default function ResumePage({ globalStyles }){
 
   return (
     <section>
-      { profile && <>
+      { profile &&
         <div className='relative w-full h-screen px-2 object-contain' >
           <iframe 
-            title='Paul Bodner resume.pdf'å
+            title='Paul Bodner resume.pdf'
             src={`${process.env.NEXT_PUBLIC_STATIC_ROUTE}${ profile.resume }`}
             className="w-full h-full"
             >
           </iframe>
         </div>
-      </>}
+      }
     </section>
   );
 }

@@ -2,9 +2,10 @@ import Image from "next/image";
 
 function ListLine({ data, isCol }){
   const padding = isCol ? '' : 'px-2'
+  const align = isCol ? 'items-center w-full' : ''
   return (
-    <li className={ ["flex items-center", padding].join(' ') }>
-      {data.image && <div className="relative w-5 h-5 me-1 my-1">
+    <li className={ ["flex", align, padding].join(' ') }>
+      {data.image && <div className="relative w-5 h-5 me-2 my-1">
         <Image 
           src={process.env.NEXT_PUBLIC_STATIC_ROUTE + data.image}
           alt={ data.name }
@@ -18,8 +19,9 @@ function ListLine({ data, isCol }){
   );
 }
 
-export default function StackCardList({dataArr, styles, title, isCol}){
+export default function StackCardList({dataArr, styles, title, isCol, shading}){
   const direction = isCol ? 'flex-col' : 'w-11/12 flex-wrap justify-evenly';
+  const colour = shading ? 'p-2 bg-offblack bg-opacity-50 rounded-lg': '' 
 
   const parsedLines = dataArr.map((lineData, i)=> <ListLine 
     key={ `${title}-line-${i}-${lineData.name}` }
@@ -28,7 +30,7 @@ export default function StackCardList({dataArr, styles, title, isCol}){
   />);
 
   return (
-    <ul className={ ['relative flex', direction].join(' ') }>
+    <ul className={ ['relative flex my-1', direction, colour].join(' ') }>
       <h3 className="w-full mb-1 text-center font-semibold" >{ title }</h3>
       { parsedLines }
     </ul>

@@ -2,6 +2,7 @@
 import { useState, useRef, useEffect } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 
+import Image from "next/image";
 import Navigation from "./Navigation";
 import Hero from '@/components/Hero';
 import ProjectPage from "./projects/ProjectPage";
@@ -12,21 +13,38 @@ import ContactPage from "./Contact/ContactPage";
 import useVisualMode from "@/utils/helpers/useVisualMode";
 
 export default function Page({styles}){
-  const [screenWidth, setScreenWidth] = useState(getCurrentWidth());
+  const [screenWidth, setScreenWidth] = useState();
   const [showMenuObj, setShowMenuObj] = useState({show: false, click: 305});
   const [mode, transition] = useVisualMode('index');
   const page = useRef();
 
-  function getCurrentWidth(){
-    return window.innerWidth
+  const getPageWidth = () => {
+    const animationObj = {}
+    if (screenWidth > 1000){
+      animationObj.width = `${(screenWidth-125)-125/2}px`;
+      animationObj.left = `${125/2}px`;
+    } else if (screenWidth > 420){
+      animationObj.width = `${screenWidth-125}px`;
+      animationObj.left = showMenuObj.show ? '0px' : `${125/2}px`;
+    } else {
+      animationObj.width = `${screenWidth-55}px`;
+      animationObj.left = showMenuObj.show ? `-${125-55}px` : `2px`;
+    }
+    return animationObj
   }
+
   
   useEffect(() => {
+    function getCurrentWidth(){
+      return window.innerWidth
+    }
     const updateWidth = () => {
       setScreenWidth(getCurrentWidth())
     }
+    if (window.innerWidth !== screenWidth){
+      updateWidth();
+    }
     window.addEventListener('resize', updateWidth);
-    
     return(() => {
       window.removeEventListener('resize', updateWidth);
     })
@@ -34,6 +52,15 @@ export default function Page({styles}){
 
   return(
     <main ref={ page } className={[styles.page, 'w-full h-screen flex'].join(' ')}>
+      <div key='background-overlay' className="absolute w-full h-full opacity-70">
+        <Image
+          src={process.env.NEXT_PUBLIC_STATIC_ROUTE + '/images/backgrounds/marbel-overlay.png'}
+          alt=''
+          fill
+          style={{ objectFit: 'cover' }}
+          sizes='5000px'
+        />
+      </div>
       <AnimatePresence initial={ false }>
         <motion.div className="relative h-screen"
           key='main-page'
@@ -41,10 +68,7 @@ export default function Page({styles}){
             width: `${screenWidth-125}px`,
             left: `${125/2}px`,
           }}
-          animate={{ 
-            width: `${screenWidth-125}px`,
-            left: showMenuObj.show ? '0px' : `${125/2}px`,
-          }}
+          animate={ getPageWidth() }
         >
           { mode === 'INDEX' && <Hero/> }
           { mode === 'PROJECTS' && <ProjectPage globalStyles={ styles }/> }

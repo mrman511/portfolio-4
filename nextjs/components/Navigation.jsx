@@ -24,6 +24,7 @@ export default function Navigation({styles, transition, showMenuObj,setShowMenuO
   
   const handleNavigation = (e) => {
     e.preventDefault();
+    setShowMenuObj(prev => ({...prev, show: false}));
     const str = e.target.href.split('/').pop();
     transition( str ? str : 'index');
   };
@@ -79,7 +80,6 @@ export default function Navigation({styles, transition, showMenuObj,setShowMenuO
           key='navigation-open'
           // initial={false}
           animate={{
-            // translateX: showMenuObj.show ? '0px' : '51px' ,
             transition: { duration: navSpeed }
           }}
         >

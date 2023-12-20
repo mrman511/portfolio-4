@@ -137,7 +137,7 @@ export default class ParticleGrid{
   continueRipple(growthRate){
     const finishedClicks = [];
     this.activeClicks.map((click, i)=>{
-      if ((click.r>=click.maxRadius )|| (click.r >= ((this.cols/2)-2))){
+      if ((click.r>=click.maxRadius)){
         finishedClicks.push(i);
       }else {
         click.r = click.r + growthRate;

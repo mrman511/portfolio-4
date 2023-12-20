@@ -22,7 +22,7 @@
 
 
 .navBtn{
-  background: rgba($black, .8);
+  background: rgba($black, .3);
 
   &:hover{
     cursor: pointer;
@@ -31,7 +31,7 @@
 
 .mcBtn{
   div {
-    background-color: $offwhite;
+    background-color: $black;
   }
 }
 

@@ -1,2 +1,1 @@
-release: python manage.py migrate
-web: gunicorn pb_backend.wsgi
+web: gunicorn --pythonpath pb_backend pb_backend.wsgi

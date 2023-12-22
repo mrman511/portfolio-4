@@ -21,7 +21,7 @@ export default function ProjectCard({styles, project, i}){
   }
 
   return (
-    <motion.section ref={cardRef} className={[styles.cardOuter, "relative w-[260px] h-96 overflow-hidden"].join(' ')}
+    <motion.section ref={cardRef} className={[styles.cardOuter, "relative w-[260px] h-[400px] overflow-hidden my-1"].join(' ')}
       initial={{ 
         rotateX: 90,
         originY: '0%' 

@@ -78,16 +78,13 @@ export default function Navigation({styles, transition, showMenuObj,setShowMenuO
       >
         <motion.nav className='absolute w-[125px] h-screen z-10'
           key='navigation-open'
-          // initial={false}
           animate={{
             transition: { duration: navSpeed }
           }}
         >
           <motion.article onClick={(e)=>{ handleClick(e) }} className={[styles.navBtn, "absolute flex justify-center items-center"].join(' ')}
             key='navBtn-open'
-            // initial={false}
             animate={{
-              // transform: showMenuObj.show ? 'translateX(0)': 'translateX(-100%)', 
               height: showMenuObj.show ? 'auto' : '100vh', 
               width: showMenuObj.show ? '125px' : '51px',
               top: showMenuObj.show ? `${showMenuObj.click}px`: '0px',
@@ -101,13 +98,11 @@ export default function Navigation({styles, transition, showMenuObj,setShowMenuO
 
           <motion.ul id='navLinks' className={[styles.navLinks, "relative h-auto pb-4 flex flex-col justify-evenly text-lg"].join(' ')}
             key='navLinksList-open'
-            // initial={false}
             animate={{ 
               translateY: '-100%',
               translateX: showMenuObj.show ? '0px' : '51px',
               top: `${showMenuObj.click}px` 
             }}
-            // transition={{ translateX: {delay: showMenuObj.show ? navSpeed : 0} }}
           >
             <li className="relative pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/' onClick={(e)=>{ handleNavigation(e) }}>Home</Link></li>
             <li className="relative pe-12 py-3"><Link className='ps-4 pe-12 py-3' href='/projects' onClick={(e)=>{ handleNavigation(e) }}>Projects</Link></li>

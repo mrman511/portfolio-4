@@ -13,7 +13,7 @@ import ContactPage from "./Contact/ContactPage";
 import useVisualMode from "@/utils/helpers/useVisualMode";
 
 export default function Page({styles}){
-  const [screenWidth, setScreenWidth] = useState();
+  const [screenWidth, setScreenWidth] = useState(320);
   const [showMenuObj, setShowMenuObj] = useState({show: false, click: 305});
   const [mode, transition] = useVisualMode('index');
   const page = useRef();
@@ -36,7 +36,7 @@ export default function Page({styles}){
   
   useEffect(() => {
     function getCurrentWidth(){
-      return window.innerWidth
+      return page.current.offsetWidth
     }
     const updateWidth = () => {
       setScreenWidth(getCurrentWidth())
@@ -64,10 +64,7 @@ export default function Page({styles}){
       <AnimatePresence initial={ false }>
         <motion.div className="relative h-screen"
           key='main-page'
-          initial={{ 
-            width: `${screenWidth-125}px`,
-            left: `${125/2}px`,
-          }}
+          initial={getPageWidth()}
           animate={ getPageWidth() }
         >
           { mode === 'INDEX' && <Hero/> }

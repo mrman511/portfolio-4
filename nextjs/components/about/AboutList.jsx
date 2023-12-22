@@ -6,8 +6,9 @@ import MyStack from "./MyStack";
 
 
 export default function AboutList({ styles, aboutMe }){
-  const [animating, toggleAnimating] = useCycle(false);
+  const [animating, toggleAnimating] = useCycle(false, true);
   const [showCard, setShowCard]=useState(1);
+  const [dragActive, toggleDragActive] = useCycle(false, true);
   const scrollCount = useRef(0);
   const scrollLimiter = 1000;
 
@@ -58,12 +59,30 @@ export default function AboutList({ styles, aboutMe }){
       }
     }
   };
+
+  const handleDragStart = (e) => {
+    e.preventDefault(e);
+    if (!dragActive) toggleDragActive();
+  }
+  const handleDragEnd = (e) => {
+    e.preventDefault(e);
+    if (dragActive) toggleDragActive()
+  }
+
+  const handleDrag = (e) => {
+    e.preventDefault();
+    if (!mouseDown || !dragActive) return;
+    console.log(e);
+  }
   
   
   return(
     <section 
       className={ [styles.aboutList, 'relative max-h-screen h-screen overflow-y-hidden'].join(' ') } 
       onWheel={ e=>{ handleScroll(e) }}
+      onMouseDown={ handleDragStart }
+      onMouseUp={ handleDragEnd }
+      onMouseMove={ handleDrag }
     >
       { parsedParagraphs }
       { parsedStack }

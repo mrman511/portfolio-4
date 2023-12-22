@@ -14,7 +14,7 @@ import useVisualMode from "@/utils/helpers/useVisualMode";
 
 export default function Page({styles}){
   const [screenWidth, setScreenWidth] = useState(320);
-  const [showMenuObj, setShowMenuObj] = useState({show: false, click: 305});
+  const [showMenuObj, setShowMenuObj] = useState({ show: false, click: 305 });
   const [mode, transition] = useVisualMode('index');
   const page = useRef();
 
@@ -51,10 +51,10 @@ export default function Page({styles}){
   })
 
   return(
-    <main ref={ page } className={[styles.page, 'w-full h-screen flex'].join(' ')}>
+    <main ref={ page } className={ [styles.page, 'w-full h-screen max-h-screen flex overflow-hidden'].join(' ') }>
       <div key='background-overlay' className="absolute w-full h-full opacity-70">
         <Image
-          src={process.env.NEXT_PUBLIC_STATIC_ROUTE + '/images/backgrounds/marbel-overlay.png'}
+          src={ process.env.NEXT_PUBLIC_STATIC_ROUTE + '/images/backgrounds/marbel-overlay.png' }
           alt=''
           fill
           style={{ objectFit: 'cover' }}
@@ -64,7 +64,7 @@ export default function Page({styles}){
       <AnimatePresence initial={ false }>
         <motion.div className="relative h-screen"
           key='main-page'
-          initial={getPageWidth()}
+          initial={ getPageWidth() }
           animate={ getPageWidth() }
         >
           { mode === 'INDEX' && <Hero/> }

@@ -1,4 +1,6 @@
 /** @type {import('tailwindcss').Config} */
+
+import themeColours from './utils/tailwind/themeColours'
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx,mdx}',
@@ -20,12 +22,7 @@ module.exports = {
         'gradient-conic':
           'conic-gradient(from 180deg at 50% 50%, var(--tw-gradient-stops))',
       },
-      colors:{
-        'offwhite': '#fffef8',
-        'lightgrey': '#eaeaea',
-        'beige': '#ddc5ba',
-        'offblack': '#1c1414',
-      }
+      colors: themeColours,
     },
   },
   plugins: [],

@@ -1,5 +1,5 @@
 'use client'
-import ProjectCard from "./ProjectCard";
+import ProjectCard from "./projectCard/ProjectCard";
 import { AnimatePresence } from "framer-motion";
 
 export default function ProjectList({styles, projects, globalStyles}){

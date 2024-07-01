@@ -18,7 +18,7 @@ export default function ProjectPage({globalStyles}){
 
   return(
     <>
-      {projects && <ProjectList projects={projects} styles={styles} globalStyles={ globalStyles }/>}
+      <ProjectList projects={projects} styles={styles} globalStyles={ globalStyles }/>
     </>
   );
 }

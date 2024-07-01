@@ -30,7 +30,7 @@ function StackItem({ data, showStackNameObj, handleShowStackName }){
           initial={{ width: 0 }}
           animate={{ width: showStackNameObj[data.name] ? 'auto' : 0 }}
         >
-          <p>{ data.name }</p>
+          <p className="whitespace-nowrap">{ data.name }</p>
         </motion.div>
       }
     </div>

@@ -2,7 +2,6 @@
 import { useState, useEffect } from "react";
 import { getProjects } from "@/utils/api/projects";
 
-import Navigation from "../Navigation";
 import ProjectList from "./ProjectList";
 import styles from '@/styles/Projects.module.scss';
 
@@ -14,7 +13,7 @@ export default function ProjectPage({globalStyles}){
     if (!projects){
       getProjects(setProjects);
     }
-  })
+  }, [projects])
 
   return(
     <>

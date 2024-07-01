@@ -7,10 +7,6 @@ import toTitleCase from "@/utils/helpers/toTitleCase"
 
 function StackItem({ data, showStackNameObj, handleShowStackName }){
 
-  function mouseEnter(){
-    console.log('enter: ', data.name);
-  }
-
   return (
     <div className="w-auto flex items-center overflow-hidden" onMouseEnter={ () => { handleShowStackName(data.name) } } >
       <div className="relative my-1 me-2 w-8 h-8">
@@ -38,7 +34,7 @@ function StackItem({ data, showStackNameObj, handleShowStackName }){
 }
 
 
-function Stack({data, keys}){
+function Stack({data, keys, title }){
   const [showStackNameObj, setShowStackNameObj] = useState();
   const openStackItem=useRef();
 
@@ -67,7 +63,7 @@ function Stack({data, keys}){
     });
 
     return (
-      <div>
+      <div key={`${title}-${key}-stack`}>
         <h4>{ toTitleCase(key) }</h4>
         <div className="flex items-center">
           { stackSections }
@@ -84,7 +80,7 @@ function Stack({data, keys}){
       });
       setShowStackNameObj(obj)
     }
-  });
+  }, [showStackNameObj]);
 
   return (
     <div className="relative w-full min-h-min">
@@ -112,7 +108,7 @@ export default function ProjectCardDescription({project, showMenu}){
         animate={{ opacity: showText ? 0 : 1 }}
         transition={{ duration: .5, delay: showText ? 0 : .5 }}
       >
-        <Stack key={`${project.title}-tech-stack`} data={ project } keys={ ['languages', 'frameworks'] } />
+        <Stack key={`${project.title}-tech-stack`} data={ project } keys={ ['languages', 'frameworks'] } title={ project.title } />
       </motion.div>
 
       <motion.div className='relative w-full p-2'

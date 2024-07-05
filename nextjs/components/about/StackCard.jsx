@@ -39,7 +39,7 @@ export default function StackCard({styles, data, i , currentCard}){
   />;
 
   return (
-    <article className={ 'relative w-full max-xs:h-[700px] max-w-[400px] h-[500px] my-4 mx-2 items-center justify-between rounded-xl overflow-hidden'}>
+    <article className={ [styles.stackCard, 'relative w-full max-xs:h-[700px] max-w-[400px] h-[500px] my-4 mx-2 items-center justify-between rounded-xl overflow-hidden'].join(' ')}>
       <div className="absolute w-full h-full z-0">
         <Image 
           src={process.env.NEXT_PUBLIC_STATIC_ROUTE + data.image}

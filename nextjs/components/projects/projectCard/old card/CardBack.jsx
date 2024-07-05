@@ -1,7 +1,7 @@
 import {  motion } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGithub } from "@fortawesome/free-brands-svg-icons";
-import StackCardList from "../StackCardList";
+import StackCardList from "../../../StackCardList";
 import { ST } from "next/dist/shared/lib/utils";
 
 export default function CardBack({ styles, cardRef, Image, Link, project, showStack }){

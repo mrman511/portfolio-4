@@ -21,7 +21,7 @@ function ListLine({ data, isCol }){
 
 export default function StackCardList({dataArr, styles, title, isCol, shading}){
   const direction = isCol ? 'flex-col' : 'w-11/12 flex-wrap justify-evenly';
-  const colour = shading ? 'p-2 bg-offblack bg-opacity-50 rounded-lg': '' 
+  const colour = shading ? 'p-2 bg-offblack-2/3 rounded-lg': '' 
 
   const parsedLines = dataArr.map((lineData, i)=> <ListLine 
     key={ `${title}-line-${i}-${lineData.name}` }

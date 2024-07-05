@@ -15,7 +15,7 @@ export default function ProjectList({styles, projects, globalStyles}){
       />)
     });
   } else {
-    for (let i = 0 ; i < 4 ; i++){
+    for (let i = 0 ; i < 6 ; i++){
       parsedProjects.push(<ProjectCard key={`loadercard-${i}`} />)
     }
   }

@@ -22,7 +22,7 @@ export default function MyStack({ data }){
 
 
   return (
-    <section className={"relative w-full h-[550px] flex flex-wrap justify-evenly items-center"}>
+    <section className={"relative w-full h-[550px] flex flex-wrap justify-evenly text-offwhite items-center"}>
       { parsedStackCards }
     </section>
   );

@@ -31,7 +31,6 @@ export const getCardAnimation = (currentCard, i) => {
       zIndex: 0,
     }
   } else if (currentCard < i){
-    console.log('here');
     return {
       translateX: '100%',
       left: '-1%',

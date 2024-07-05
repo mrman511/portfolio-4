@@ -1,27 +1,10 @@
 import Image from "next/image";
-import { motion } from "framer-motion";
-import { getInitial, getCardAnimation } from '@/utils/animation/stackCards.js';
 
 import StackCardList from "../StackCardList";
 
-// function StackLine({styles, lineData }){
-//   return (
-//     <li className="m-2 flex items-center">
-//       {lineData.image && <div className="relative w-8 h-8">
-//         <Image 
-//           src={ process.env.NEXT_PUBLIC_STATIC_ROUTE + lineData.image }
-//           alt={ lineData.name }
-//           fill
-//           style={{ objectFit: 'cover' }}
-//         />  
-//       </div>}
-//       { lineData.name }
-//     </li>
-//   );
-// }
 
 export default function StackCard({styles, data, i , currentCard}){
-  let backgroundPosition
+  let backgroundPosition;
   if (i === 1){
     backgroundPosition = '55% 50%';
   } else if (i === 2){
@@ -35,7 +18,7 @@ export default function StackCard({styles, data, i , currentCard}){
     isCol={ true }
     title='Languages'
     shading={ true }
-  />
+  />;
 
   const parsedFrameworks = <StackCardList 
     key={ `stackcard-frameworks` } 
@@ -44,7 +27,7 @@ export default function StackCard({styles, data, i , currentCard}){
     isCol={ true }
     title='Frameworks'
     shading={ true }
-    />
+    />;
 
 
   const parsedTechnologies = <StackCardList 
@@ -53,14 +36,10 @@ export default function StackCard({styles, data, i , currentCard}){
     dataArr={ data.technologies }
     title='Technologies'
     shading={ true }
-  />
+  />;
 
   return (
-    <motion.article className={ [styles.stackCard, 'absolute w-full max-xs:h-[700px] max-w-[400px] h-[500px] items-center justify-between rounded-xl overflow-hidden'].join(' ') }
-      initial={ getInitial(i) }
-      animate={ getCardAnimation(currentCard, i) }
-      transition={{ duration: .5 }}
-    >
+    <article className={ 'relative w-full max-xs:h-[700px] max-w-[400px] h-[500px] my-4 mx-2 items-center justify-between rounded-xl overflow-hidden'}>
       <div className="absolute w-full h-full z-0">
         <Image 
           src={process.env.NEXT_PUBLIC_STATIC_ROUTE + data.image}
@@ -74,10 +53,10 @@ export default function StackCard({styles, data, i , currentCard}){
       </div>
 
       <div className="relative w-full h-full flex flex-col items-center justify-evenly">
-        <div className={ [styles.stackInfo, "relative flex justify-center w-full m-2 p-2 text-lg sm:text-2xl font-semibold sm:font-bold text-center rounded-lg"].join(' ') } >
+        <div className={  "relative flex justify-center w-full m-2 p-2 text-lg sm:text-2xl font-semibold sm:font-bold text-center rounded-lg bg-offblack-2/3"} >
           <h2>{ data.title }</h2>
         </div>
-        <div className={[styles.stackInfo, "relative z-10 text-center mx-2 p-2 max-xs:text-sm rounded-lg"].join(' ')}>
+        <div className={ "relative z-10 text-center mx-2 p-2 max-xs:text-sm rounded-lg bg-offblack-2/3"}>
           <p>{ data.description }</p>
         </div>
 
@@ -91,6 +70,6 @@ export default function StackCard({styles, data, i , currentCard}){
           </article>
         </div>
       </div>
-    </motion.article>
+    </article>
   );
-}
+};

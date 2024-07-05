@@ -2,7 +2,7 @@ import { useRef, useState} from "react";
 import { useCycle } from "framer-motion";
 import AboutCard from "./AboutCard";
 import AboutParagraph from "./AboutParagraph";
-import MyStack from "./MyStack";
+import MyStack from "../MyStack";
 
 
 export default function AboutList({ styles, aboutMe }){
@@ -12,25 +12,24 @@ export default function AboutList({ styles, aboutMe }){
   const scrollCount = useRef(0);
   const scrollLimiter = 1000;
 
-  const parsedParagraphs = aboutMe.paragraphs.map((paragraph, i)=>(
-    <AboutCard key={ `bio-paragraph-${i}` } 
+  const parsedParagraphs = aboutMe.paragraphs.map((paragraph, i)=><AboutCard 
+      key={ `bio-paragraph-${i}` } 
       data={ paragraph }
       Component={ AboutParagraph }
       showCard={ showCard }
       toggleAnimating={ toggleAnimating }
     />
-  ));
-
-  const parsedStack = (
-    <AboutCard key={`bio-stack`}
-      styles={ styles }
-      data={ aboutMe.stacks }
-      order={(parsedParagraphs.length + 2)}
-      Component={ MyStack }
-      showCard={ showCard }
-      toggleAnimating={ toggleAnimating }
-    />
   );
+
+  const parsedStack = <AboutCard 
+    key={`bio-stack`}
+    styles={ styles }
+    data={ aboutMe.stacks }
+    order={(parsedParagraphs.length + 2)}
+    Component={ MyStack }
+    showCard={ showCard }
+    toggleAnimating={ toggleAnimating }
+  />;
 
   const handleScroll = (e) => {
     if (!animating){
@@ -45,7 +44,7 @@ export default function AboutList({ styles, aboutMe }){
           toggleAnimating();
           const newCard = showCard + 2;
           setShowCard(newCard);
-        }
+        };
       } else if (scrollCount.current <= (scrollLimiter * -1)){
         scrollCount.current = 0;
         if (showCard === (parsedParagraphs.length + 2)){
@@ -56,24 +55,24 @@ export default function AboutList({ styles, aboutMe }){
           const newCard = showCard - 1;
           setShowCard(newCard)
         }
-      }
-    }
+      };
+    };
   };
 
   const handleDragStart = (e) => {
     e.preventDefault(e);
     if (!dragActive) toggleDragActive();
-  }
+  };
   const handleDragEnd = (e) => {
     e.preventDefault(e);
     if (dragActive) toggleDragActive()
-  }
+  };
 
-  const handleDrag = (e) => {
-    e.preventDefault();
-    if (!mouseDown || !dragActive) return;
-    console.log(e);
-  }
+  // const handleDrag = (e) => {
+  //   e.preventDefault();
+  //   if (!mouseDown || !dragActive) return;
+  //   console.log(e);
+  // };
   
   
   return(
@@ -82,7 +81,7 @@ export default function AboutList({ styles, aboutMe }){
       onWheel={ e=>{ handleScroll(e) }}
       onMouseDown={ handleDragStart }
       onMouseUp={ handleDragEnd }
-      onMouseMove={ handleDrag }
+      // onMouseMove={ handleDrag }
     >
       { parsedParagraphs }
       { parsedStack }
